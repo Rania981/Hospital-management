@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - RANI smart Hospital</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web">
+    </script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+
+    <style>
+        /* ---- Additional styles to match the design image ---- */
+
+        .auth-layout {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            padding: 1.5rem;
+        }
+
+        .auth-card {
+            max-width: 480px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+            border: 1px solid #eef2f6;
+        }
+
+        .auth-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+        }
+        .auth-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: #e8f1fa;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3B82C4;
+        }
+        .auth-logo-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #3B82C4; /* Updated to blue */
+        }
+
+        .auth-header h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: #3B82C4; /* Updated to blue */
+            margin-bottom: 0.3rem;
+        }
+        .auth-header p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #1F2D3D;
+            margin-bottom: 0.4rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+        .input-wrapper .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 1.2rem;
+        }
+        .input-wrapper input {
+            width: 100%;
+            padding: 0.7rem 1rem 0.7rem 2.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            background: #fff;
+            transition: all 0.2s ease;
+            color: #1F2D3D;
+        }
+        .input-wrapper input::placeholder {
+            color: #94a3b8;
+        }
+        .input-wrapper input:focus {
+            border-color: #3B82C4;
+            box-shadow: 0 0 0 3px rgba(59, 130, 196, 0.12);
+            outline: none;
+        }
+        .input-wrapper .eye-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #94a3b8;
+            transition: color 0.2s;
+            font-size: 1.2rem;
+        }
+        .input-wrapper .eye-icon:hover {
+            color: #3B82C4;
+        }
+
+        .input-wrapper.error input {
+            border-color: #dc2626;
+            background: #fef2f2;
+        }
+        .form-group .error-message {
+            font-size: 0.8rem;
+            color: #dc2626;
+            margin-top: 0.25rem;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            min-height: 1.2rem;
+        }
+        .form-group .error-message.show {
+            opacity: 1;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0 1.5rem 0;
+        }
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #475569;
+            cursor: pointer;
+        }
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #3B82C4;
+            cursor: pointer;
+        }
+        .forgot-link {
+            font-size: 0.85rem;
+            color: #3B82C4;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .forgot-link:hover {
+            color: #1f5d8e;
+            text-decoration: underline;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 0.75rem;
+            background: #3B82C4;
+            color: #fff;
+            border: none;
+            border-radius: 100px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .btn-submit:hover {
+            background: #2d6a9e;
+            box-shadow: 0 4px 16px rgba(59, 130, 196, 0.25);
+            transform: translateY(-1px);
+        }
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+        .btn-submit.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        .btn-submit .spinner {
+            display: none;
+            width: 1.2rem;
+            height: 1.2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin-right: 0.4rem;
+        }
+        .btn-submit.loading .spinner {
+            display: inline-block;
+        }
+        .btn-submit.loading .btn-text {
+            display: none;
+        }
+        .btn-submit.loading .btn-loading-text {
+            display: inline;
+        }
+        .btn-loading-text {
+            display: none;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .feedback-message {
+            margin-top: 0.75rem;
+            padding: 0.6rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .feedback-message.show {
+            display: flex;
+        }
+        .feedback-message.success {
+            background: #e6f7ed;
+            color: #0a7143;
+            border: 1px solid #b2e6cf;
+        }
+        .feedback-message.error {
+            background: #fde8e8;
+            color: #b91c1c;
+            border: 1px solid #fbc5c5;
+        }
+
+        /* ---- Demo Accounts (matches image) ---- */
+        .demo-accounts {
+            margin-top: 1.75rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        .demo-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+        .demo-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .demo-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0.8rem;
+            border-radius: 10px;
+            background: #f8fafc;
+            border: 1px solid #eef2f6;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .demo-item:hover {
+            background: #e8f1fa;
+            border-color: #3B82C4;
+        }
+        .demo-item.active-demo {
+            background: #e8f1fa;
+            border-color: #3B82C4;
+            box-shadow: 0 0 0 2px rgba(59, 130, 196, 0.15);
+        }
+        .demo-item .demo-role {
+            font-weight: 600;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .demo-item .demo-role i {
+            color: #3B82C4;
+            font-size: 1rem;
+        }
+        .demo-item .demo-email {
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        .auth-footer a {
+            color: #3B82C4;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ---- Forgot Password Modal ---- */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-box {
+            background: #fff;
+            border-radius: 24px;
+            max-width: 440px;
+            width: 90%;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transform: scale(0.95) translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+        .modal-overlay.open .modal-box {
+            transform: scale(1) translateY(0);
+        }
+        .modal-box .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .modal-box .modal-close:hover {
+            color: #1e293b;
+        }
+        .modal-box .modal-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+        .modal-box .modal-desc {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+        }
+        .modal-box .input-wrapper {
+            position: relative;
+        }
+        .modal-box .input-wrapper .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+        .modal-box .input-wrapper input {
+            padding-left: 2.8rem;
+        }
+        .modal-box .success-message {
+            color: #0a7143;
+            font-weight: 500;
+            padding: 0.75rem;
+            background: #e6f7ed;
+            border-radius: 12px;
+            display: none;
+            margin-top: 0.75rem;
+        }
+        .modal-box .success-message.show {
+            display: block;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+            justify-content: flex-end;
+        }
+        .modal-actions button {
+            padding: 0.5rem 1.25rem;
+            border-radius: 100px;
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .modal-actions .btn-primary-modal {
+            background: #3B82C4;
+            color: #fff;
+        }
+        .modal-actions .btn-primary-modal:hover {
+            background: #2d6a9e;
+        }
+        .modal-actions .btn-secondary-modal {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+        .modal-actions .btn-secondary-modal:hover {
+            background: #e2e8f0;
+        }
+
+        .slide-up {
+            animation: slideUp 0.5s ease both;
+        }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .auth-card {
+                padding: 1.75rem 1.25rem;
+            }
+            .demo-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.1rem;
+            }
+            .form-actions {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="auth-layout">
+        <div class="auth-card slide-up">
+
+            <!-- Logo -->
+            <a href="index.html" class="auth-logo">
+                <div class="auth-logo-icon">
+                    <i class="ph ph-heartbeat" style="font-size: 28px;"></i>
+                </div>
+                <span class="auth-logo-text">RANI</span>
+            </a>
+
+            <!-- Header -->
+            <div class="auth-header">
+                <h1>Welcome Back</h1>
+                <p>Sign in to access your healthcare workspace.</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" novalidate>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-wrapper" id="emailWrapper">
+                        <i class="ph ph-envelope-simple input-icon"></i>
+                        <input type="email" id="email" placeholder="example@rani.hospital" required aria-required="true">
+                    </div>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper" id="passwordWrapper">
+                        <i class="ph ph-lock-key input-icon"></i>
+                        <input type="password" id="password" placeholder="••••••••" required aria-required="true" minlength="6">
+                        <i class="ph ph-eye eye-icon" id="passwordToggle" role="button" tabindex="0" aria-label="Show password"></i>
+                    </div>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <!-- Remember Me & Forgot Password -->
+                <div class="form-actions">
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" id="rememberMe">
+                        Remember Me
+                    </label>
+                    <a href="#" id="forgotLink" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <!-- Feedback -->
+                <div class="feedback-message" id="feedbackMessage"></div>
+
+                <!-- Sign In Button -->
+                <button type="submit" class="btn-submit" id="loginBtn">
+                    <span class="spinner"></span>
+                    <span class="btn-text">Sign In <i class="ph ph-arrow-right"></i></span>
+                    <span class="btn-loading-text">Signing In…</span>
+                </button>
+            </form>
+
+            <!-- Demo Accounts (exactly as in the image) -->
+            <div class="demo-accounts">
+                <div class="demo-title">Demo Accounts</div>
+                <div class="demo-grid" id="demoGrid">
+                    <div class="demo-item" data-role="admin" data-email="admin@rani.com" data-password="admin123">
+                        <span class="demo-role"><i class="ph ph-buildings"></i> Admin</span>
+                        <span class="demo-email">admin@rani.com</span>
+                    </div>
+                    <div class="demo-item" data-role="doctor" data-email="doctor@rani.com" data-password="doctor123">
+                        <span class="demo-role"><i class="ph ph-stethoscope"></i> Doctor</span>
+                        <span class="demo-email">doctor@rani.com</span>
+                    </div>
+                    <div class="demo-item" data-role="receptionist" data-email="reception@rani.com" data-password="reception123">
+                        <span class="demo-role"><i class="ph ph-user-focus"></i> Receptionist</span>
+                        <span class="demo-email">reception@rani.com</span>
+                    </div>
+                    <div class="demo-item active-demo" data-role="patient" data-email="patient@rani.com" data-password="patient123">
+                        <span class="demo-role"><i class="ph ph-heartbeat"></i> Patient</span>
+                        <span class="demo-email">patient@rani.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="auth-footer">
+                Don't have an account? <a href="register.html">Create Account</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal-overlay" id="forgotModal">
+        <div class="modal-box">
+            <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+            <div class="modal-title">Reset Your Password</div>
+            <div class="modal-desc">Enter the email address associated with your account and we'll send you a reset link.</div>
+            <div class="form-group">
+                <label for="modalEmail">Email Address</label>
+                <div class="input-wrapper">
+                    <i class="ph ph-envelope-simple input-icon"></i>
+                    <input type="email" id="modalEmail" placeholder="you@rani.hospital">
+                </div>
+                <div class="error-message" id="modalEmailError"></div>
+            </div>
+            <div class="success-message" id="modalSuccess">If an account exists with this email, a password reset link has been sent.</div>
+            <div class="modal-actions">
+                <button class="btn-secondary-modal" id="modalCancel">Cancel</button>
+                <button class="btn-primary-modal" id="modalSend">Send Reset Link</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // ---- DOM refs ----
+            const form = document.getElementById('loginForm');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const emailWrapper = document.getElementById('emailWrapper');
+            const passwordWrapper = document.getElementById('passwordWrapper');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            const rememberMe = document.getElementById('rememberMe');
+            const loginBtn = document.getElementById('loginBtn');
+            const feedback = document.getElementById('feedbackMessage');
+            const forgotLink = document.getElementById('forgotLink');
+            const modal = document.getElementById('forgotModal');
+            const modalClose = document.getElementById('modalClose');
+            const modalCancel = document.getElementById('modalCancel');
+            const modalSend = document.getElementById('modalSend');
+            const modalEmail = document.getElementById('modalEmail');
+            const modalEmailError = document.getElementById('modalEmailError');
+            const modalSuccess = document.getElementById('modalSuccess');
+            const demoItems = document.querySelectorAll('.demo-item');
+            const passwordToggle = document.getElementById('passwordToggle');
+
+            // ---- Role config ----
+            const roleConfig = {
+                admin: { redirect: 'admin_dashboard.html' },
+                doctor: { redirect: 'doctor_dashboard.html' },
+                receptionist: { redirect: 'receptionist_dashboard.html' },
+                patient: { redirect: 'dashboard.html' }
+            };
+
+            // ---- Track selected role ----
+            let selectedRole = 'patient';
+
+            // ---- Demo item click ----
+            demoItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const role = this.dataset.role;
+                    const email = this.dataset.email;
+                    const password = this.dataset.password;
+
+                    selectedRole = role;
+
+                    // Fill fields
+                    emailInput.value = email;
+                    passwordInput.value = password;
+
+                    // Update active state
+                    demoItems.forEach(d => d.classList.remove('active-demo'));
+                    this.classList.add('active-demo');
+
+                    // Clear errors
+                    clearErrors();
+                    hideFeedback();
+                });
+            });
+
+            // ---- Pre-fill Patient demo on load ----
+            const defaultPatient = document.querySelector('.demo-item[data-role="patient"]');
+            if (defaultPatient) {
+                emailInput.value = defaultPatient.dataset.email;
+                passwordInput.value = defaultPatient.dataset.password;
+            }
+
+            // ---- Validation helpers ----
+            function setError(wrapper, errorEl, message) {
+                wrapper.classList.add('error');
+                errorEl.textContent = message;
+                errorEl.classList.add('show');
+            }
+
+            function clearError(wrapper, errorEl) {
+                wrapper.classList.remove('error');
+                errorEl.textContent = '';
+                errorEl.classList.remove('show');
+            }
+
+            function clearErrors() {
+                clearError(emailWrapper, emailError);
+                clearError(passwordWrapper, passwordError);
+            }
+
+            function validateEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
+
+            function validateField(field) {
+                if (field === 'email') {
+                    const val = emailInput.value.trim();
+                    if (!val) {
+                        setError(emailWrapper, emailError, 'Email is required.');
+                        return false;
+                    } else if (!validateEmail(val)) {
+                        setError(emailWrapper, emailError, 'Please enter a valid email address.');
+                        return false;
+                    } else {
+                        clearError(emailWrapper, emailError);
+                        return true;
+                    }
+                } else if (field === 'password') {
+                    const val = passwordInput.value;
+                    if (!val) {
+                        setError(passwordWrapper, passwordError, 'Password is required.');
+                        return false;
+                    } else if (val.length < 6) {
+                        setError(passwordWrapper, passwordError, 'Password must be at least 6 characters.');
+                        return false;
+                    } else {
+                        clearError(passwordWrapper, passwordError);
+                        return true;
+                    }
+                }
+                return true;
+            }
+
+            emailInput.addEventListener('blur', function() { validateField('email'); });
+            passwordInput.addEventListener('blur', function() { validateField('password'); });
+            emailInput.addEventListener('focus', function() { clearError(emailWrapper, emailError); });
+            passwordInput.addEventListener('focus', function() { clearError(passwordWrapper, passwordError); });
+
+            // ---- Password toggle ----
+            passwordToggle.addEventListener('click', function() {
+                const type = passwordInput.type === 'password' ? 'text' : 'password';
+                passwordInput.type = type;
+                this.classList.toggle('ph-eye');
+                this.classList.toggle('ph-eye-slash');
+                this.setAttribute('aria-label', type === 'password' ? 'Show password' : 'Hide password');
+            });
+            passwordToggle.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+
+            // ---- Remember Me ----
+            const savedEmail = localStorage.getItem('rani_remember_email');
+            if (savedEmail) {
+                emailInput.value = savedEmail;
+                rememberMe.checked = true;
+                // Also update active demo highlight if email matches
+                demoItems.forEach(item => {
+                    if (item.dataset.email === savedEmail) {
+                        demoItems.forEach(d => d.classList.remove('active-demo'));
+                        item.classList.add('active-demo');
+                        selectedRole = item.dataset.role;
+                    }
+                });
+            }
+
+            // ---- Forgot Password modal ----
+            function openModal() {
+                modal.classList.add('open');
+                modalEmail.value = '';
+                modalSuccess.classList.remove('show');
+                clearError(modalEmail.parentElement, modalEmailError);
+                modalEmail.focus();
+            }
+
+            function closeModal() {
+                modal.classList.remove('open');
+            }
+
+            forgotLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                openModal();
+            });
+
+            modalClose.addEventListener('click', closeModal);
+            modalCancel.addEventListener('click', closeModal);
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
+
+            modalSend.addEventListener('click', function() {
+                const email = modalEmail.value.trim();
+                if (!email) {
+                    setError(modalEmail.parentElement, modalEmailError, 'Email is required.');
+                    return;
+                } else if (!validateEmail(email)) {
+                    setError(modalEmail.parentElement, modalEmailError, 'Please enter a valid email.');
+                    return;
+                } else {
+                    clearError(modalEmail.parentElement, modalEmailError);
+                    modalSuccess.classList.add('show');
+                    this.disabled = true;
+                    setTimeout(() => { this.disabled = false; }, 2000);
+                }
+            });
+
+            modalEmail.addEventListener('blur', function() {
+                const val = this.value.trim();
+                if (val && !validateEmail(val)) {
+                    setError(this.parentElement, modalEmailError, 'Please enter a valid email.');
+                } else {
+                    clearError(this.parentElement, modalEmailError);
+                }
+            });
+
+            // ---- Feedback display ----
+            function showFeedback(message, type = 'success') {
+                feedback.textContent = message;
+                feedback.className = 'feedback-message show ' + type;
+                if (type === 'success') {
+                    setTimeout(() => { feedback.classList.remove('show'); }, 5000);
+                }
+            }
+
+            function hideFeedback() {
+                feedback.classList.remove('show');
+            }
+
+            // ---- Form submit ----
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const isEmailValid = validateField('email');
+                const isPasswordValid = validateField('password');
+
+                if (!isEmailValid || !isPasswordValid) {
+                    showFeedback('Please fix the errors above.', 'error');
+                    return;
+                }
+
+                loginBtn.classList.add('loading');
+                hideFeedback();
+
+                setTimeout(() => {
+                    if (rememberMe.checked) {
+                        localStorage.setItem('rani_remember_email', emailInput.value.trim());
+                    } else {
+                        localStorage.removeItem('rani_remember_email');
+                    }
+
+                    showFeedback('✓ Login successful. Redirecting to your workspace…', 'success');
+
+                    setTimeout(() => {
+                        const config = roleConfig[selectedRole];
+                        window.location.href = config ? config.redirect : 'dashboard.html';
+                    }, 1000);
+                }, 1500);
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

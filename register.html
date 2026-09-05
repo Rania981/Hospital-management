@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - RANI smart Hospital</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web">
+    </script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+
+    <style>
+        /* ---- Additional styles for register page ---- */
+
+        .patient-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #e8f1fa;
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #1F2D3D;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(59, 130, 196, 0.15);
+        }
+        .patient-badge i {
+            color: #3B82C4;
+            font-size: 1.1rem;
+        }
+
+        .form-group .error-message {
+            font-size: 0.8rem;
+            color: #dc2626;
+            margin-top: 0.25rem;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            min-height: 1.2rem;
+        }
+        .form-group .error-message.show {
+            opacity: 1;
+        }
+        .form-group .input-wrapper.error input {
+            border-color: #dc2626;
+            background: #fef2f2;
+        }
+
+        /* Password strength indicator */
+        .password-strength {
+            display: flex;
+            gap: 0.3rem;
+            margin-top: 0.3rem;
+            align-items: center;
+        }
+        .strength-bar {
+            height: 3px;
+            flex: 1;
+            background: #e2e8f0;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+        .strength-bar.active.weak {
+            background: #dc2626;
+        }
+        .strength-bar.active.medium {
+            background: #f59e0b;
+        }
+        .strength-bar.active.strong {
+            background: #16a34a;
+        }
+        .strength-text {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #64748b;
+            min-width: 2.8rem;
+        }
+
+        /* Loading state */
+        .btn-submit.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        .btn-submit .spinner {
+            display: none;
+            width: 1.2rem;
+            height: 1.2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin-right: 0.5rem;
+        }
+        .btn-submit.loading .spinner {
+            display: inline-block;
+        }
+        .btn-submit.loading .btn-text {
+            display: none;
+        }
+        .btn-submit.loading .btn-loading-text {
+            display: inline;
+        }
+        .btn-loading-text {
+            display: none;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Feedback / Success modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-box {
+            background: #fff;
+            border-radius: 24px;
+            max-width: 440px;
+            width: 90%;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transform: scale(0.95) translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-align: center;
+            position: relative;
+        }
+        .modal-overlay.open .modal-box {
+            transform: scale(1) translateY(0);
+        }
+        .modal-box .success-icon {
+            font-size: 3rem;
+            color: #16a34a;
+            margin-bottom: 0.75rem;
+        }
+        .modal-box .modal-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .modal-box .modal-desc {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+        .modal-box .btn-primary-modal {
+            background: #3B82C4;
+            color: #fff;
+            border: none;
+            padding: 0.6rem 2rem;
+            border-radius: 100px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .modal-box .btn-primary-modal:hover {
+            background: #2d6a9e;
+        }
+
+        /* Eye icon tooltip */
+        .eye-icon {
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .eye-icon:hover {
+            color: #3B82C4;
+        }
+
+        /* slide-up animation */
+        .slide-up {
+            animation: slideUp 0.6s ease both;
+        }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* input focus */
+        .input-wrapper input:focus {
+            border-color: #3B82C4;
+            box-shadow: 0 0 0 3px rgba(59, 130, 196, 0.15);
+            outline: none;
+        }
+        .input-wrapper.error input:focus {
+            border-color: #dc2626;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 480px) {
+            .modal-box {
+                padding: 2rem 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="auth-layout">
+        <div class="auth-card slide-up">
+
+            <a href="index.html" class="auth-logo">
+                <div class="auth-logo-icon">
+                    <i class="ph ph-heartbeat" style="font-size: 32px;"></i>
+                </div>
+                <div class="auth-logo-text">RANI</div>
+            </a>
+
+            <div class="auth-header">
+                <h1>Create Account</h1>
+                <p>Join our digital healthcare community.</p>
+                <div class="patient-badge">
+                    <i class="ph ph-heartbeat"></i> For Patients
+                </div>
+            </div>
+
+            <form id="registerForm" novalidate>
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <div class="input-wrapper" id="nameWrapper">
+                        <i class="ph ph-user input-icon"></i>
+                        <input type="text" id="name" placeholder="e.g. Jane Doe" required aria-required="true">
+                    </div>
+                    <div class="error-message" id="nameError"></div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-wrapper" id="emailWrapper">
+                        <i class="ph ph-envelope-simple input-icon"></i>
+                        <input type="email" id="email" placeholder="you@rani.hospital" required aria-required="true">
+                    </div>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper" id="passwordWrapper">
+                        <i class="ph ph-lock-key input-icon"></i>
+                        <input type="password" id="password" placeholder="Min. 6 characters" required aria-required="true" minlength="6">
+                        <i class="ph ph-eye eye-icon" id="passwordToggle" role="button" tabindex="0" aria-label="Show password"></i>
+                    </div>
+                    <div class="password-strength" id="strengthIndicator">
+                        <div class="strength-bar" id="bar1"></div>
+                        <div class="strength-bar" id="bar2"></div>
+                        <div class="strength-bar" id="bar3"></div>
+                        <span class="strength-text" id="strengthText">Weak</span>
+                    </div>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="form-group" style="margin-bottom: 32px;">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="input-wrapper" id="confirmWrapper">
+                        <i class="ph ph-lock-key input-icon"></i>
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required aria-required="true">
+                        <i class="ph ph-eye eye-icon" id="confirmToggle" role="button" tabindex="0" aria-label="Show password"></i>
+                    </div>
+                    <div class="error-message" id="confirmError"></div>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="btn-submit" id="registerBtn">
+                    <span class="spinner"></span>
+                    <span class="btn-text">Create Account <i class="ph ph-check-circle"></i></span>
+                    <span class="btn-loading-text">Creating Account…</span>
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                Already have an account? <a href="login.html">Sign In</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-box">
+            <div class="success-icon"><i class="ph-fill ph-check-circle"></i></div>
+            <div class="modal-title">Account Created!</div>
+            <div class="modal-desc">Your patient account has been successfully created. You can now sign in to access your appointments and health information.</div>
+            <button class="btn-primary-modal" id="modalGoToLogin">Sign In Now</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // ---- DOM refs ----
+            const form = document.getElementById('registerForm');
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const confirmInput = document.getElementById('confirmPassword');
+            const nameWrapper = document.getElementById('nameWrapper');
+            const emailWrapper = document.getElementById('emailWrapper');
+            const passwordWrapper = document.getElementById('passwordWrapper');
+            const confirmWrapper = document.getElementById('confirmWrapper');
+            const nameError = document.getElementById('nameError');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            const confirmError = document.getElementById('confirmError');
+            const registerBtn = document.getElementById('registerBtn');
+            const successModal = document.getElementById('successModal');
+            const modalGoToLogin = document.getElementById('modalGoToLogin');
+
+            // Password strength elements
+            const bar1 = document.getElementById('bar1');
+            const bar2 = document.getElementById('bar2');
+            const bar3 = document.getElementById('bar3');
+            const strengthText = document.getElementById('strengthText');
+
+            // Toggle buttons
+            const passwordToggle = document.getElementById('passwordToggle');
+            const confirmToggle = document.getElementById('confirmToggle');
+
+            // ---- Validation helpers ----
+            function setError(wrapper, errorEl, message) {
+                wrapper.classList.add('error');
+                errorEl.textContent = message;
+                errorEl.classList.add('show');
+            }
+
+            function clearError(wrapper, errorEl) {
+                wrapper.classList.remove('error');
+                errorEl.textContent = '';
+                errorEl.classList.remove('show');
+            }
+
+            function clearAllErrors() {
+                clearError(nameWrapper, nameError);
+                clearError(emailWrapper, emailError);
+                clearError(passwordWrapper, passwordError);
+                clearError(confirmWrapper, confirmError);
+            }
+
+            function validateEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
+
+            // ---- Field validators ----
+            function validateName() {
+                const val = nameInput.value.trim();
+                if (!val) {
+                    setError(nameWrapper, nameError, 'Full name is required.');
+                    return false;
+                } else if (val.length < 2) {
+                    setError(nameWrapper, nameError, 'Name must be at least 2 characters.');
+                    return false;
+                } else {
+                    clearError(nameWrapper, nameError);
+                    return true;
+                }
+            }
+
+            function validateEmailField() {
+                const val = emailInput.value.trim();
+                if (!val) {
+                    setError(emailWrapper, emailError, 'Email is required.');
+                    return false;
+                } else if (!validateEmail(val)) {
+                    setError(emailWrapper, emailError, 'Please enter a valid email address.');
+                    return false;
+                } else {
+                    clearError(emailWrapper, emailError);
+                    return true;
+                }
+            }
+
+            function validatePassword() {
+                const val = passwordInput.value;
+                if (!val) {
+                    setError(passwordWrapper, passwordError, 'Password is required.');
+                    return false;
+                } else if (val.length < 6) {
+                    setError(passwordWrapper, passwordError, 'Password must be at least 6 characters.');
+                    return false;
+                } else {
+                    clearError(passwordWrapper, passwordError);
+                    return true;
+                }
+            }
+
+            function validateConfirm() {
+                const pwd = passwordInput.value;
+                const conf = confirmInput.value;
+                if (!conf) {
+                    setError(confirmWrapper, confirmError, 'Please confirm your password.');
+                    return false;
+                } else if (conf !== pwd) {
+                    setError(confirmWrapper, confirmError, 'Passwords do not match.');
+                    return false;
+                } else {
+                    clearError(confirmWrapper, confirmError);
+                    return true;
+                }
+            }
+
+            // ---- Real-time validation on blur ----
+            nameInput.addEventListener('blur', validateName);
+            emailInput.addEventListener('blur', validateEmailField);
+            passwordInput.addEventListener('blur', validatePassword);
+            confirmInput.addEventListener('blur', validateConfirm);
+
+            // Clear errors on focus
+            [nameInput, emailInput, passwordInput, confirmInput].forEach(inp => {
+                inp.addEventListener('focus', function() {
+                    const wrapper = this.closest('.input-wrapper');
+                    const errorEl = wrapper.parentElement.querySelector('.error-message');
+                    if (wrapper && errorEl) {
+                        wrapper.classList.remove('error');
+                        errorEl.classList.remove('show');
+                        errorEl.textContent = '';
+                    }
+                });
+            });
+
+            // ---- Password strength indicator ----
+            function updateStrength(password) {
+                const bars = [bar1, bar2, bar3];
+                bars.forEach(b => { b.className = 'strength-bar'; });
+
+                if (!password) {
+                    strengthText.textContent = '';
+                    return;
+                }
+
+                let score = 0;
+                if (password.length >= 6) score++;
+                if (password.length >= 10) score++;
+                if (/[A-Z]/.test(password) && /[a-z]/.test(password)) score++;
+                if (/\d/.test(password)) score++;
+                if (/[^A-Za-z0-9]/.test(password)) score++;
+
+                let level = 0;
+                let label = 'Weak';
+                if (score >= 4) { level = 3;
+                    label = 'Strong'; } else if (score >= 2) { level = 2;
+                    label = 'Medium'; } else if (score >= 1) { level = 1;
+                    label = 'Weak'; }
+
+                for (let i = 0; i < 3; i++) {
+                    if (i < level) {
+                        bars[i].classList.add('active');
+                        if (level === 1) bars[i].classList.add('weak');
+                        else if (level === 2) bars[i].classList.add('medium');
+                        else if (level === 3) bars[i].classList.add('strong');
+                    }
+                }
+                strengthText.textContent = label;
+                strengthText.style.color = level === 3 ? '#16a34a' : level === 2 ? '#f59e0b' : '#dc2626';
+            }
+
+            passwordInput.addEventListener('input', function() {
+                updateStrength(this.value);
+                // Also re-check confirm if it was valid before
+                if (confirmInput.value) validateConfirm();
+            });
+
+            // ---- Password toggle ----
+            function togglePasswordVisibility(input, toggleBtn) {
+                const type = input.type === 'password' ? 'text' : 'password';
+                input.type = type;
+                toggleBtn.classList.toggle('ph-eye');
+                toggleBtn.classList.toggle('ph-eye-slash');
+                toggleBtn.setAttribute('aria-label', type === 'password' ? 'Show password' : 'Hide password');
+            }
+
+            passwordToggle.addEventListener('click', function() {
+                togglePasswordVisibility(passwordInput, this);
+            });
+            passwordToggle.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault();
+                    this.click(); }
+            });
+
+            confirmToggle.addEventListener('click', function() {
+                togglePasswordVisibility(confirmInput, this);
+            });
+            confirmToggle.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault();
+                    this.click(); }
+            });
+
+            // ---- Form submit ----
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Validate all
+                const isNameValid = validateName();
+                const isEmailValid = validateEmailField();
+                const isPwdValid = validatePassword();
+                const isConfirmValid = validateConfirm();
+
+                if (!isNameValid || !isEmailValid || !isPwdValid || !isConfirmValid) {
+                    // Show a subtle feedback (optional)
+                    return;
+                }
+
+                // Loading state
+                registerBtn.classList.add('loading');
+
+                // Simulate registration delay
+                setTimeout(() => {
+                    // Success: show modal
+                    successModal.classList.add('open');
+                    registerBtn.classList.remove('loading');
+                }, 1500);
+            });
+
+            // ---- Modal actions ----
+            modalGoToLogin.addEventListener('click', function() {
+                window.location.href = 'login.html';
+            });
+
+            // Click outside to close modal
+            successModal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('open');
+                }
+            });
+
+            // ---- Extra: confirm password sync ----
+            confirmInput.addEventListener('input', function() {
+                if (this.value) validateConfirm();
+            });
+
+            // ---- Pre-fill demo? No, keep empty for real registration.
+        });
+    </script>
+
+</body>
+
+</html>

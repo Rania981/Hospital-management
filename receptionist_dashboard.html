@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receptionist Dashboard | RANI</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="receptionist_dashboard.css">
+</head>
+
+<body>
+
+    <div class="dashboard-layout">
+
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon"><i class="ph ph-heartbeat"></i></div>
+                    RANI
+                </div>
+                <div class="portal-label">Receptionist Portal</div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-view="dashboard"><i class="ph-fill ph-house"></i>
+                    Dashboard</button>
+                <button class="nav-item" data-view="register-patient"><i class="ph ph-user-plus"></i> Register
+                    Patient</button>
+                <button class="nav-item" data-view="patients"><i class="ph ph-users"></i> Patients</button>
+                <button class="nav-item" data-view="book-appointment"><i class="ph ph-calendar-plus"></i>
+                    Appointments</button>
+                <button class="nav-item" data-view="check-in"><i class="ph ph-check-square"></i> Check-In</button>
+                <button class="nav-item" data-view="doctors"><i class="ph ph-user-md"></i> Doctors</button>
+                <button class="nav-item" data-view="departments"><i class="ph ph-buildings"></i> Departments</button>
+                <button class="nav-item" data-view="billing"><i class="ph ph-credit-card"></i> Billing</button>
+                <button class="nav-item" data-view="notifications"><i class="ph ph-bell"></i> Notifications</button>
+                <button class="nav-item" data-view="settings"><i class="ph ph-gear"></i> Settings</button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="nav-item" data-view="profile"><i class="ph ph-user-circle"></i> Sarah Ahmed</button>
+                <button class="nav-item" style="color: var(--color-error);"><i class="ph ph-sign-out"></i>
+                    Logout</button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-wrapper">
+
+            <!-- TOP NAVIGATION -->
+            <header class="top-nav">
+                <h2 class="page-title" id="page-title">Receptionist Dashboard</h2>
+
+                <div class="top-actions">
+                    <div class="search-bar">
+                        <i class="ph ph-magnifying-glass"></i>
+                        <input type="text" placeholder="Search patient by name or ID...">
+                    </div>
+
+                    <button class="icon-btn" data-view="notifications">
+                        <i class="ph ph-bell"></i>
+                        <span class="badge"></span>
+                    </button>
+
+                    <div class="user-profile" data-view="profile">
+                        <img src="https://i.pravatar.cc/150?img=5" alt="Sarah Ahmed">
+                        <div class="user-info">
+                            <span class="user-name">Sarah Ahmed</span>
+                            <span class="user-role">Receptionist <i class="ph ph-caret-down"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dynamic Views -->
+            <main class="page-content" id="views-container">
+
+                <!-- VIEW: DASHBOARD (Overview) -->
+                <div id="view-dashboard" class="view active">
+
+                    <!-- Welcome Section -->
+                    <div class="welcome-header">
+                        <div class="welcome-text">
+                            <h1>Good Morning, Sarah 👋</h1>
+                            <p>Manage today's patients and appointments efficiently.</p>
+                        </div>
+                        <div class="date-status">
+                            <div class="date-text">Wednesday, September 2, 2026</div>
+                            <div class="status-indicator">
+                                <span style="font-size:10px;">●</span> On Duty
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Today's Overview -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="ph-fill ph-users"></i></div>
+                            <div class="stat-content">
+                                <div class="stat-title">Patients Waiting</div>
+                                <div class="stat-value">18</div>
+                                <div class="stat-subtitle">Currently in queue</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background:rgba(56,161,105,0.1); color:var(--color-success);">
+                                <i class="ph-fill ph-calendar-check"></i></div>
+                            <div class="stat-content">
+                                <div class="stat-title">Today's Appointments</div>
+                                <div class="stat-value">47</div>
+                                <div class="stat-subtitle" style="color:var(--color-warning);">12 remaining</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background:rgba(128,90,213,0.1); color:#805AD5;"><i
+                                    class="ph-fill ph-user-circle-plus"></i></div>
+                            <div class="stat-content">
+                                <div class="stat-title">New Registrations</div>
+                                <div class="stat-value">9</div>
+                                <div class="stat-subtitle" style="color:#805AD5;">Today</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background:rgba(59,130,196,0.1); color:var(--color-primary);">
+                                <i class="ph-fill ph-check-square-offset"></i></div>
+                            <div class="stat-content">
+                                <div class="stat-title">Checked-In</div>
+                                <div class="stat-value">35</div>
+                                <div class="stat-subtitle">Completed today</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="qa-grid">
+                        <div class="qa-main-card" data-view="register-patient">
+                            <div class="qa-title">
+                                <div class="qa-icon"
+                                    style="margin-bottom:0; background:rgba(255,255,255,0.25); color:white;"><i
+                                        class="ph ph-plus"></i></div> Register Patient
+                            </div>
+                            <div class="qa-subtitle">Create new digital record</div>
+                        </div>
+                        <div class="qa-card" data-view="book-appointment">
+                            <div class="qa-icon"><i class="ph-fill ph-calendar-plus"></i></div>
+                            <div class="qa-title">Book Appointment</div>
+                            <div class="qa-subtitle">Schedule with doctor</div>
+                        </div>
+                        <div class="qa-card" data-view="patients">
+                            <div class="qa-icon"><i class="ph-fill ph-magnifying-glass"></i></div>
+                            <div class="qa-title">Find Patient</div>
+                            <div class="qa-subtitle">Search digital records</div>
+                        </div>
+                        <div class="qa-card" data-view="check-in">
+                            <div class="qa-icon"><i class="ph-fill ph-check-square"></i></div>
+                            <div class="qa-title">Check-In Patient</div>
+                            <div class="qa-subtitle">Confirm arrival</div>
+                        </div>
+                    </div>
+
+                    <!-- Two Column Layout -->
+                    <div class="d-layout">
+                        <!-- Left Column: Appointment Queue -->
+                        <div>
+                            <div class="section-head">
+                                <h3>Today's Appointment Queue</h3>
+                                <a href="#" class="view-all" data-view="book-appointment"
+                                    style="font-size:0.85rem; color:var(--color-primary); font-weight:600;">View All
+                                    Appointments →</a>
+                            </div>
+
+                            <div class="data-table-container">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Time</th>
+                                            <th>Patient</th>
+                                            <th>Doctor / Dept</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="font-weight:600; color:var(--color-primary-deep);">09:00 AM</td>
+                                            <td>
+                                                <div style="font-weight:600; color:var(--color-primary-deep);">Abel
+                                                    Tesfaye</div>
+                                            </td>
+                                            <td>
+                                                <div style="font-size:0.85rem; font-weight:600;">Dr. Ahmed</div>
+                                                <div style="font-size:0.75rem; color:var(--color-text-secondary);">
+                                                    Cardiology</div>
+                                            </td>
+                                            <td><span class="status-badge status-waiting">Waiting</span></td>
+                                            <td><button class="btn btn-outline-primary checkin-btn"
+                                                    style="padding:6px 12px; font-size:0.8rem;">Check In</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight:600; color:var(--color-primary-deep);">09:30 AM</td>
+                                            <td>
+                                                <div style="font-weight:600; color:var(--color-primary-deep);">Sara
+                                                    Mohammed</div>
+                                            </td>
+                                            <td>
+                                                <div style="font-size:0.85rem; font-weight:600;">Dr. Hana Bekele</div>
+                                                <div style="font-size:0.75rem; color:var(--color-text-secondary);">
+                                                    General Care</div>
+                                            </td>
+                                            <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                                            <td><button class="btn btn-outline-primary checkin-btn"
+                                                    style="padding:6px 12px; font-size:0.8rem;">Check In</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight:600; color:var(--color-primary-deep);">10:00 AM</td>
+                                            <td>
+                                                <div style="font-weight:600; color:var(--color-primary-deep);">Miki
+                                                    Desta</div>
+                                            </td>
+                                            <td>
+                                                <div style="font-size:0.85rem; font-weight:600;">Dr. Ahmed</div>
+                                                <div style="font-size:0.75rem; color:var(--color-text-secondary);">
+                                                    Cardiology</div>
+                                            </td>
+                                            <td><span class="status-badge status-checkedin">Checked In</span></td>
+                                            <td><button class="btn btn-secondary"
+                                                    style="padding:6px 12px; font-size:0.8rem;"
+                                                    data-view="patient-profile">View</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight:600; color:var(--color-primary-deep);">10:30 AM</td>
+                                            <td>
+                                                <div style="font-weight:600; color:var(--color-primary-deep);">Selam
+                                                    Tadesse</div>
+                                            </td>
+                                            <td>
+                                                <div style="font-size:0.85rem; font-weight:600;">Dr. Samuel Desta</div>
+                                                <div style="font-size:0.75rem; color:var(--color-text-secondary);">
+                                                    Dental</div>
+                                            </td>
+                                            <td><span class="status-badge status-waiting">Waiting</span></td>
+                                            <td><button class="btn btn-outline-primary checkin-btn"
+                                                    style="padding:6px 12px; font-size:0.8rem;">Check In</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div>
+                            <!-- Current Patient Queue Widget -->
+                            <div class="panel">
+                                <h3 style="font-size:1.05rem; margin-bottom:16px; color:var(--color-primary-deep);">
+                                    Current Patient Queue</h3>
+
+                                <div
+                                    style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--color-border); padding-bottom:12px; margin-bottom:12px;">
+                                    <div>
+                                        <div style="color:var(--color-warning); font-size:0.75rem; font-weight:700;">#01
+                                            • WAITING: 12 MIN</div>
+                                        <div style="font-weight:600; color:var(--color-primary-deep);">Abel Tesfaye
+                                        </div>
+                                        <div style="font-size:0.8rem; color:var(--color-text-secondary);">09:00 AM • Dr.
+                                            Ahmed</div>
+                                    </div>
+                                    <button class="btn btn-primary" style="padding:4px 12px; font-size:0.75rem;">Check
+                                        In</button>
+                                </div>
+
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <div>
+                                        <div style="color:var(--color-success); font-size:0.75rem; font-weight:700;">#02
+                                            • JUST ARRIVED</div>
+                                        <div style="font-weight:600; color:var(--color-primary-deep);">Sara Mohammed
+                                        </div>
+                                        <div style="font-size:0.8rem; color:var(--color-text-secondary);">09:30 AM • Dr.
+                                            Hana</div>
+                                    </div>
+                                    <button class="btn btn-primary" style="padding:4px 12px; font-size:0.75rem;">Check
+                                        In</button>
+                                </div>
+                            </div>
+
+                            <!-- Recent Activity -->
+                            <div class="panel">
+                                <h3 style="font-size:1.05rem; margin-bottom:16px; color:var(--color-primary-deep);">
+                                    Recent Activity</h3>
+                                <div class="timeline">
+                                    <div class="t-item">
+                                        <div class="t-content">
+                                            <div class="t-time">09:30 AM</div>
+                                            <div><i class="ph-fill ph-credit-card"
+                                                    style="color:var(--color-success)"></i> Payment completed <span
+                                                    class="t-title">850 ETB</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="t-item">
+                                        <div class="t-content">
+                                            <div class="t-time">09:25 AM</div>
+                                            <div><i class="ph-fill ph-calendar" style="color:var(--color-warning)"></i>
+                                                Appt rescheduled <span class="t-title">Sara Mohammed</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="t-item">
+                                        <div class="t-content">
+                                            <div class="t-time">09:15 AM</div>
+                                            <div><i class="ph-fill ph-user-plus" style="color:var(--color-primary)"></i>
+                                                New patient registered <span class="t-title">Miki Desta</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="t-item">
+                                        <div class="t-content">
+                                            <div class="t-time">09:05 AM</div>
+                                            <div><i class="ph-fill ph-check-square"
+                                                    style="color:var(--color-success)"></i> Checked in <span
+                                                    class="t-title">Abel Tesfaye</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- VIEW: REGISTER NEW PATIENT -->
+                <div id="view-register-patient" class="view">
+
+                    <div
+                        style="background:var(--color-card); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:32px;">
+                        <div style="text-align:center; max-width:600px; margin:0 auto 32px;">
+                            <h2 style="color:var(--color-primary-deep); font-size:1.8rem;">Register New Patient</h2>
+                            <p style="color:var(--color-text-secondary); margin-top:8px;">Create a secure digital
+                                patient record perfectly eliminating the need for physical paper forms.</p>
+                        </div>
+
+                        <div style="max-width:800px; margin:0 auto;">
+                            <div class="form-section">
+                                <h3>1. Personal Information</h3>
+                                <div class="form-grid">
+                                    <div class="form-group"><label>First Name</label><input type="text"
+                                            class="form-control" placeholder="E.g. Abel"></div>
+                                    <div class="form-group"><label>Last Name</label><input type="text"
+                                            class="form-control" placeholder="E.g. Tesfaye"></div>
+                                    <div class="form-group"><label>Date of Birth</label><input type="date"
+                                            class="form-control"></div>
+                                    <div class="form-group"><label>Gender</label>
+                                        <select class="form-control">
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group"><label>Phone Number</label><input type="text"
+                                            class="form-control" placeholder="+251 ..."></div>
+                                    <div class="form-group"><label>National ID No.</label><input type="text"
+                                            class="form-control" placeholder="ID Number"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>2. Contact & Emergency</h3>
+                                <div class="form-grid">
+                                    <div class="form-group"><label>City / Address</label><input type="text"
+                                            class="form-control" placeholder="Addis Ababa, Subcity..."></div>
+                                    <div class="form-group"><label>Emergency Contact Name</label><input type="text"
+                                            class="form-control" placeholder="Full name"></div>
+                                    <div class="form-group"><label>Emergency Contact Phone</label><input type="text"
+                                            class="form-control" placeholder="+251 ..."></div>
+                                    <div class="form-group"><label>Relationship</label><input type="text"
+                                            class="form-control" placeholder="E.g. Mother, Spouse"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>3. Medical Information</h3>
+                                <div class="form-grid">
+                                    <div class="form-group"><label>Blood Type</label>
+                                        <select class="form-control">
+                                            <option>Select</option>
+                                            <option>A+</option>
+                                            <option>O+</option>
+                                            <option>B+</option>
+                                            <option>AB+</option>
+                                            <option>O-</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group"><label>Known Allergies (Optional)</label><input type="text"
+                                            class="form-control" placeholder="List allergies if any"></div>
+                                </div>
+                            </div>
+
+                            <div
+                                style="display:flex; justify-content:flex-end; gap:16px; margin-top:32px; padding-top:24px; border-top:1px solid var(--color-border);">
+                                <button class="btn btn-outline-white"
+                                    style="border-color:var(--color-border); color:var(--color-text-primary);"
+                                    data-view="dashboard">Cancel</button>
+                                <button class="btn btn-secondary">Save as Draft</button>
+                                <button class="btn btn-primary" id="register-patient-btn">Create Patient Record</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW: BOOK APPOINTMENT WIZARD -->
+                <div id="view-book-appointment" class="view">
+                    <div
+                        style="background:var(--color-card); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:32px;">
+                        <div style="text-align:center; max-width:600px; margin:0 auto 40px;">
+                            <h2 style="color:var(--color-primary-deep); font-size:1.6rem;">Book Appointment</h2>
+                            <p style="color:var(--color-text-secondary); margin-top:8px;">Schedule an appointment
+                                seamlessly across all departments.</p>
+                        </div>
+
+                        <!-- Wizard Progress -->
+                        <div class="wizard-progress">
+                            <div class="step active" data-step="1">
+                                <div class="step-circle">1</div>
+                                <div class="step-label">Department</div>
+                            </div>
+                            <div class="step" data-step="2">
+                                <div class="step-circle">2</div>
+                                <div class="step-label">Doctor</div>
+                            </div>
+                            <div class="step" data-step="3">
+                                <div class="step-circle">3</div>
+                                <div class="step-label">Date</div>
+                            </div>
+                            <div class="step" data-step="4">
+                                <div class="step-circle">4</div>
+                                <div class="step-label">Time</div>
+                            </div>
+                            <div class="step" data-step="5">
+                                <div class="step-circle">5</div>
+                                <div class="step-label">Confirm</div>
+                            </div>
+                        </div>
+
+                        <div style="max-width:800px; margin:0 auto;">
+
+                            <!-- Step 1: Department -->
+                            <div id="book-step-1">
+                                <h3 style="margin-bottom:20px; color:var(--color-primary-deep);">Select Department</h3>
+                                <div class="selection-grid" style="margin-bottom:32px;">
+                                    <div class="card-selectable selected">
+                                        <div style="font-size:1.8rem; color:var(--color-primary);"><i
+                                                class="ph-fill ph-heartbeat"></i></div>
+                                        <div style="font-weight:600;">Cardiology</div>
+                                    </div>
+                                    <div class="card-selectable">
+                                        <div style="font-size:1.8rem; color:var(--color-primary);"><i
+                                                class="ph-fill ph-tooth"></i></div>
+                                        <div style="font-weight:600;">Dental</div>
+                                    </div>
+                                    <div class="card-selectable">
+                                        <div style="font-size:1.8rem; color:var(--color-primary);"><i
+                                                class="ph-fill ph-bandaids"></i></div>
+                                        <div style="font-weight:600;">General Care</div>
+                                    </div>
+                                    <div class="card-selectable">
+                                        <div style="font-size:1.8rem; color:var(--color-primary);"><i
+                                                class="ph-fill ph-brain"></i></div>
+                                        <div style="font-weight:600;">Neurology</div>
+                                    </div>
+                                    <div class="card-selectable">
+                                        <div style="font-size:1.8rem; color:var(--color-primary);"><i
+                                                class="ph-fill ph-flask"></i></div>
+                                        <div style="font-weight:600;">Laboratory</div>
+                                    </div>
+                                </div>
+                                <div style="display:flex; justify-content:flex-end;">
+                                    <button class="btn btn-primary wizard-btn-next">Continue</button>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Doctor -->
+                            <div id="book-step-2" style="display:none;">
+                                <h3 style="margin-bottom:20px; color:var(--color-primary-deep);">Select Doctor</h3>
+                                <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:32px;">
+                                    <div class="card-selectable selected doctor-profile-card">
+                                        <img src="https://i.pravatar.cc/150?img=11" alt="Dr">
+                                        <div class="d-info">
+                                            <div class="d-name">Dr. Ahmed Mohammed</div>
+                                            <div class="d-spec">Cardiology</div>
+                                            <div
+                                                style="font-size:0.75rem; color:var(--color-success); font-weight:600;">
+                                                Available Today</div>
+                                        </div>
+                                        <div><button class="btn btn-outline-primary"
+                                                style="padding:6px 16px;">Select</button></div>
+                                    </div>
+                                    <div class="card-selectable doctor-profile-card">
+                                        <img src="https://i.pravatar.cc/150?img=9" alt="Dr">
+                                        <div class="d-info">
+                                            <div class="d-name">Dr. Meron Tadesse</div>
+                                            <div class="d-spec">Cardiology</div>
+                                            <div
+                                                style="font-size:0.75rem; color:var(--color-text-secondary); font-weight:600;">
+                                                Next Available: Tomorrow</div>
+                                        </div>
+                                        <div><button class="btn btn-outline-primary"
+                                                style="padding:6px 16px;">Select</button></div>
+                                    </div>
+                                </div>
+                                <div style="display:flex; justify-content:space-between;">
+                                    <button class="btn btn-secondary">Back</button>
+                                    <button class="btn btn-primary wizard-btn-next">Continue</button>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Date -->
+                            <div id="book-step-3" style="display:none;">
+                                <h3 style="margin-bottom:20px; color:var(--color-primary-deep);">Select Date</h3>
+                                <div
+                                    style="background:var(--color-background); padding:24px; border-radius:var(--radius-lg); text-align:center; margin-bottom:32px;">
+                                    <p style="color:var(--color-text-secondary); margin-bottom:16px;">(Modern
+                                        Interactive Calendar Widget Renders Here)</p>
+                                    <input type="date" class="form-control" value="2026-09-02"
+                                        style="max-width:300px; margin:0 auto;">
+                                </div>
+                                <div style="display:flex; justify-content:space-between;">
+                                    <button class="btn btn-secondary">Back</button>
+                                    <button class="btn btn-primary wizard-btn-next">Continue</button>
+                                </div>
+                            </div>
+
+                            <!-- Step 4: Time -->
+                            <div id="book-step-4" style="display:none;">
+                                <h3 style="margin-bottom:20px; color:var(--color-primary-deep);">Select Available Time
+                                </h3>
+                                <div class="time-grid" style="margin-bottom:32px;">
+                                    <div class="time-slot unavailable">09:00 AM</div>
+                                    <div class="time-slot unavailable">09:30 AM</div>
+                                    <div class="time-slot selected">10:00 AM</div>
+                                    <div class="time-slot">10:30 AM</div>
+                                    <div class="time-slot">11:00 AM</div>
+                                    <div class="time-slot">11:30 AM</div>
+                                    <div class="time-slot">01:00 PM</div>
+                                    <div class="time-slot">01:30 PM</div>
+                                    <div class="time-slot">02:00 PM</div>
+                                    <div class="time-slot">02:30 PM</div>
+                                </div>
+                                <div style="display:flex; justify-content:space-between;">
+                                    <button class="btn btn-secondary">Back</button>
+                                    <button class="btn btn-primary wizard-btn-next">Continue</button>
+                                </div>
+                            </div>
+
+                            <!-- Step 5: Confirm -->
+                            <div id="book-step-5" style="display:none;">
+                                <h3 style="margin-bottom:20px; color:var(--color-primary-deep);">Appointment Summary
+                                </h3>
+                                <div
+                                    style="background:var(--color-background); border:1px solid var(--color-border); padding:24px; border-radius:var(--radius-lg); margin-bottom:32px;">
+                                    <div class="form-grid">
+                                        <div>
+                                            <span
+                                                style="font-size:0.8rem; color:var(--color-text-secondary); display:block; margin-bottom:4px;">Patient
+                                                (Search selected)</span>
+                                            <strong style="color:var(--color-primary-deep);">Abel Tesfaye</strong>
+                                        </div>
+                                        <div>
+                                            <span
+                                                style="font-size:0.8rem; color:var(--color-text-secondary); display:block; margin-bottom:4px;">Department</span>
+                                            <strong style="color:var(--color-primary-deep);">Cardiology</strong>
+                                        </div>
+                                        <div>
+                                            <span
+                                                style="font-size:0.8rem; color:var(--color-text-secondary); display:block; margin-bottom:4px;">Doctor</span>
+                                            <strong style="color:var(--color-primary-deep);">Dr. Ahmed Mohammed</strong>
+                                        </div>
+                                        <div>
+                                            <span
+                                                style="font-size:0.8rem; color:var(--color-text-secondary); display:block; margin-bottom:4px;">Date
+                                                & Time</span>
+                                            <strong style="color:var(--color-primary-deep);">Sept 2, 2026 • 10:00
+                                                AM</strong>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top:20px;">
+                                        <label
+                                            style="font-size:0.8rem; color:var(--color-text-secondary); display:block; margin-bottom:4px;">Reason
+                                            for Visit (Optional)</label>
+                                        <input type="text" class="form-control"
+                                            placeholder="E.g. Follow up on medication">
+                                    </div>
+                                </div>
+
+                                <!-- Paperless Indicator -->
+                                <div
+                                    style="background:rgba(59,130,196,0.05); padding:16px; border-radius:var(--radius-sm); border:1px dashed var(--color-primary); color:var(--color-primary-deep); font-size:0.85rem; font-weight:500; text-align:center; margin-bottom:24px;">
+                                    <i class="ph-fill ph-leaf" style="color:var(--color-success)"></i> Digital Booking:
+                                    This appointment will automatically sync to the doctor's calendar and the patient's
+                                    mobile portal. No paper card needed.
+                                </div>
+
+                                <div style="display:flex; justify-content:space-between;">
+                                    <button class="btn btn-secondary">Back</button>
+                                    <button class="btn btn-primary" id="btn-confirm-appointment">Confirm
+                                        Appointment</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW: FIND PATIENT -->
+                <div id="view-patients" class="view">
+                    <div class="panel">
+                        <h2 style="font-size:1.4rem; color:var(--color-primary-deep); margin-bottom:24px;">Find Patient
+                        </h2>
+                        <div style="display:flex; gap:16px; margin-bottom:24px;">
+                            <input type="text" class="form-control"
+                                placeholder="Search by patient name, phone number, or Patient ID..." style="flex:1;">
+                            <button class="btn btn-primary"><i class="ph ph-magnifying-glass"></i> Search</button>
+                        </div>
+
+                        <div style="display:flex; gap:12px; margin-bottom:24px;">
+                            <button class="btn btn-secondary"
+                                style="background:var(--color-primary-soft); color:var(--color-primary-deep);">All
+                                Patients</button>
+                            <button class="btn btn-outline-white"
+                                style="border-color:var(--color-border); color:var(--color-text-primary);">Recent</button>
+                            <button class="btn btn-outline-white"
+                                style="border-color:var(--color-border); color:var(--color-text-primary);">Today's
+                                Patients</button>
+                        </div>
+
+                        <div class="data-table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Patient</th>
+                                        <th>Patient ID</th>
+                                        <th>Phone</th>
+                                        <th>Last Visit</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div style="font-weight:600; color:var(--color-primary-deep);">Abel Tesfaye
+                                            </div>
+                                        </td>
+                                        <td>RANI-2026-00125</td>
+                                        <td>+251 911 234 567</td>
+                                        <td>Today</td>
+                                        <td><span class="status-badge status-checkedin">Active</span></td>
+                                        <td><button class="btn btn-secondary"
+                                                style="padding:6px 12px; font-size:0.8rem;"
+                                                data-view="patient-profile">View Profile →</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW: PATIENT PROFILE (Receptionist Mode) -->
+                <div id="view-patient-profile" class="view">
+                    <div
+                        style="background:var(--color-card); border-radius:var(--radius-lg); padding:32px; border:1px solid var(--color-border); margin-bottom:24px; display:flex; gap:24px; align-items:center;">
+                        <img src="https://i.pravatar.cc/150?img=12" alt="Patient"
+                            style="width:100px; height:100px; border-radius:50%;">
+                        <div>
+                            <h2 style="color:var(--color-primary-deep);">Abel Tesfaye</h2>
+                            <div
+                                style="display:flex; gap:16px; margin-top:8px; color:var(--color-text-secondary); font-size:0.95rem;">
+                                <span>Patient ID: <strong>RANI-2026-00125</strong></span>
+                                <span class="status-badge status-checkedin">Active</span>
+                            </div>
+                        </div>
+                        <div style="margin-left:auto; display:flex; gap:12px;">
+                            <button class="btn btn-outline-primary" style="padding:10px 16px;"
+                                data-view="check-in">Check In</button>
+                            <button class="btn btn-primary" data-view="book-appointment">Book Appointment</button>
+                        </div>
+                    </div>
+                    <div
+                        style="display:flex; gap:32px; border-bottom:1px solid var(--color-border); margin-bottom:24px; font-weight:600; color:var(--color-text-secondary);">
+                        <div
+                            style="padding-bottom:12px; color:var(--color-primary); border-bottom:2px solid var(--color-primary); cursor:pointer;">
+                            Overview</div>
+                        <div style="padding-bottom:12px; cursor:pointer;" data-view="book-appointment">Appointments
+                        </div>
+                        <div style="padding-bottom:12px; cursor:pointer;" data-view="billing">Billing</div>
+                    </div>
+                </div>
+
+                <!-- VIEW: CHECK-IN -->
+                <div id="view-check-in" class="view">
+                    <div class="panel" style="max-width:600px; margin:0 auto; padding:40px;">
+                        <div style="text-align:center; margin-bottom:32px;">
+                            <h2 style="font-size:1.6rem; color:var(--color-primary-deep);">Patient Check-In</h2>
+                            <p style="color:var(--color-text-secondary); margin-top:8px;">Confirm arrival and digitally
+                                add to doctor queue.</p>
+                        </div>
+
+                        <div style="margin-bottom:32px;">
+                            <input type="text" class="form-control" placeholder="Search patient or scan ID..."
+                                value="Abel Tesfaye"
+                                style="background:#F0F7FF; border-color:var(--color-primary); box-shadow:0 0 0 3px rgba(59,130,196,0.1);">
+                        </div>
+
+                        <div
+                            style="background:var(--color-background); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:24px; margin-bottom:32px;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:16px;">
+                                <div>
+                                    <h3 style="color:var(--color-primary-deep);">Abel Tesfaye</h3>
+                                    <p style="font-size:0.85rem; color:var(--color-text-secondary);">Patient ID:
+                                        RANI-2026-00125</p>
+                                </div>
+                                <span class="status-badge status-confirmed">Confirmed</span>
+                            </div>
+                            <div class="form-grid" style="font-size:0.9rem;">
+                                <div><span
+                                        style="color:var(--color-text-secondary); display:block;">Doctor</span><strong
+                                        style="color:var(--color-primary-deep);">Dr. Ahmed Mohammed</strong></div>
+                                <div><span
+                                        style="color:var(--color-text-secondary); display:block;">Department</span><strong
+                                        style="color:var(--color-primary-deep);">Cardiology</strong></div>
+                                <div><span
+                                        style="color:var(--color-text-secondary); display:block;">Appointment</span><strong
+                                        style="color:var(--color-primary-deep);">09:00 AM (Today)</strong></div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary checkin-btn" style="width:100%; padding:14px; font-size:1rem;"
+                            data-view="dashboard">Confirm & Add to Doctor Queue</button>
+                    </div>
+                </div>
+
+                <!-- VIEW: OTHER PLACEHOLDERS -->
+                <div id="view-doctors" class="view">
+                    <div class="panel">
+                        <h2>Doctor Availability</h2>
+                        <p>View doctors currently checked in and their real-time queues.</p>
+                    </div>
+                </div>
+                <div id="view-departments" class="view">
+                    <div class="panel">
+                        <h2>Departments</h2>
+                    </div>
+                </div>
+                <div id="view-billing" class="view">
+                    <div class="panel">
+                        <h2>Billing Overview</h2>
+                        <p>Process co-pays and manage pending payment statuses.</p>
+                    </div>
+                </div>
+                <div id="view-notifications" class="view">
+                    <div class="panel">
+                        <h2>Notifications</h2>
+                        <p>Appointment updates and system alerts.</p>
+                    </div>
+                </div>
+                <div id="view-settings" class="view">
+                    <div class="panel">
+                        <h2>Settings</h2>
+                    </div>
+                </div>
+                <div id="view-profile" class="view">
+                    <div class="panel">
+                        <h2>Receptionist Profile</h2>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="receptionist_dashboard.js"></script>
+</body>
+
+</html>

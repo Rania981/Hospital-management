@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RANI - Modern Digital Hospital</title>
+    <meta name="description"
+        content="RANI provides connected, patient-centered, paperless healthcare. Better Care. Less Paperwork.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5 for layout -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header fixed-top pb-2" id="header">
+        <nav class="navbar navbar-expand-lg py-2">
+            <div class="container">
+                <a href="#" class="logo d-flex align-items-center gap-2 text-decoration-none">
+                    <div class="logo-icon d-flex align-items-center justify-content-center bg-white rounded text-primary shadow-sm"
+                        style="width: 36px; height: 36px;">
+                        <i class="ph ph-heartbeat fs-4 shadow-sm text-primary" style="color: #3B82C4 !important;"></i>
+                    </div>
+                    <span class="fw-bold fs-5 text-dark" style="font-family: var(--font-heading);">RANI</span>
+                </a>
+
+                <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav">
+                    <i class="ph ph-list fs-2 text-dark"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto align-items-lg-center gap-3 mt-3 mt-lg-0">
+                        <li class="nav-item"><a class="nav-link active fw-medium" href="#home"
+                                style="color: #667085;">Home</a></li>
+                        <li class="nav-item"><a class="nav-link fw-medium" href="#services" style="color: #667085;">Our
+                                Care</a></li>
+                        <li class="nav-item"><a class="nav-link fw-medium" href="#how-it-works"
+                                style="color: #667085;">How It Works</a></li>
+                        <li class="nav-item"><a class="nav-link fw-medium" href="#services"
+                                style="color: #667085;">Services</a></li>
+                        <li class="nav-item"><a class="nav-link fw-medium" href="#about"
+                                style="color: #667085;">About</a></li>
+                    </ul>
+                    <ul class="navbar-nav align-items-lg-center gap-3 mt-3 mt-lg-0">
+                        <li class="nav-item"><a href="login.html"
+                                class="nav-link sign-in fw-semibold text-dark hover-primary"
+                                style="color: #1F2D3D !important;">Sign In</a></li>
+                        <li class="nav-item"><a href="register.html"
+                                class="btn btn-primary rounded-pill px-4 py-2 shadow-sm fw-semibold ms-lg-2">Book
+                                Appointment</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page-content" data-bs-spy="scroll" data-bs-target="#navbarNav">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <!-- Background elements -->
+            <div class="hero-bg-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+            </div>
+
+            <div class="container hero-container">
+                <div class="hero-content fade-up">
+
+                    <h1>Healthcare <span class="text-gradient">Without the Paperwork.</span></h1>
+
+                    <div class="hero-cta">
+                        <a href="register.html" class="btn btn-primary">Get Started <i
+                                class="ph ph-arrow-right"></i></a>
+                        <a href="#features" class="btn btn-secondary">Explore the System</a>
+                    </div>
+
+                    <div class="hero-trust">
+                        <div class="trust-item"><i class="ph-fill ph-check-circle"></i> Digital Patient Records</div>
+                        <div class="trust-item"><i class="ph-fill ph-check-circle"></i> Secure Access</div>
+                        <div class="trust-item"><i class="ph-fill ph-check-circle"></i> Paperless Workflows</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why RANI Section -->
+        <section id="about" class="section why-rani-section pt-5 pb-5 bg-background border-bottom border-top">
+            <div class="container py-5 my-md-3">
+
+                <!-- Section Header -->
+                <div class="row justify-content-center text-center fade-up mb-5 pb-3">
+                    <div class="col-lg-7">
+                        <span class="section-eyebrow text-primary fw-bold text-uppercase mb-3 d-block"
+                            style="letter-spacing: 2px; font-size: 0.75rem;">Why Choose RANI</span>
+                        <h2 class="display-6 fw-bolder mb-3">Healthcare, <span class="text-primary">Connected Around
+                                You.</span></h2>
+                        <p class="lead text-secondary fw-medium mb-0" style="font-size: 1.05rem; line-height: 1.7;">From
+                            your first appointment to your medical records and prescriptions, RANI makes it easier to
+                            stay connected with your care.</p>
+                    </div>
+                </div>
+
+                <!-- Cards Grid -->
+                <div class="row g-4 pt-2">
+
+                    <!-- Card 1 -->
+                    <div class="col-lg-3 col-sm-6 fade-up">
+                        <div class="why-photo-card rounded-4 overflow-hidden position-relative shadow-sm">
+                            <div class="why-card-img" style="background-image: url('card_appointments.png');"></div>
+                            <div class="why-card-overlay">
+                                <div class="why-card-icon mb-3">
+                                    <i class="ph-fill ph-calendar-plus"></i>
+                                </div>
+                                <h5 class="fw-bold text-white mb-2">Simple Appointments</h5>
+                                <p class="text-white-50 small fw-medium mb-0 lh-base why-card-desc">Find and book the
+                                    right doctor easily through our digital platform.</p>
+                            </div>
+                            <div class="why-card-number">01</div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="col-lg-3 col-sm-6 fade-up" style="transition-delay: 0.1s;">
+                        <div class="why-photo-card rounded-4 overflow-hidden position-relative shadow-sm why-card-tall">
+                            <div class="why-card-img" style="background-image: url('card_health_records.png');"></div>
+                            <div class="why-card-overlay">
+                                <div class="why-card-icon mb-3">
+                                    <i class="ph-fill ph-folder-user"></i>
+                                </div>
+                                <h5 class="fw-bold text-white mb-2">Your Health Records</h5>
+                                <p class="text-white-50 small fw-medium mb-0 lh-base why-card-desc">Access your medical
+                                    information and test results digitally, anytime.</p>
+                            </div>
+                            <div class="why-card-number">02</div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="col-lg-3 col-sm-6 fade-up" style="transition-delay: 0.2s;">
+                        <div class="why-photo-card rounded-4 overflow-hidden position-relative shadow-sm">
+                            <div class="why-card-img" style="background-image: url('card_connected_doctors.png');">
+                            </div>
+                            <div class="why-card-overlay">
+                                <div class="why-card-icon mb-3">
+                                    <i class="ph-fill ph-stethoscope"></i>
+                                </div>
+                                <h5 class="fw-bold text-white mb-2">Connected Doctors</h5>
+                                <p class="text-white-50 small fw-medium mb-0 lh-base why-card-desc">Your healthcare team
+                                    can securely access the information they need to support your care.</p>
+                            </div>
+                            <div class="why-card-number">03</div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="col-lg-3 col-sm-6 fade-up" style="transition-delay: 0.3s;">
+                        <div class="why-photo-card rounded-4 overflow-hidden position-relative shadow-sm why-card-tall">
+                            <div class="why-card-img" style="background-image: url('card_paperless_care.png');"></div>
+                            <div class="why-card-overlay">
+                                <div class="why-card-icon mb-3">
+                                    <i class="ph-fill ph-leaf"></i>
+                                </div>
+                                <h5 class="fw-bold text-white mb-2">Paperless Care</h5>
+                                <p class="text-white-50 small fw-medium mb-0 lh-base why-card-desc">Less paperwork
+                                    throughout your visit means more focus on people.</p>
+                            </div>
+                            <div class="why-card-number">04</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Care / Services -->
+        <section id="services" class="care-section position-relative overflow-hidden">
+
+            <!-- Full-bleed cinematic background -->
+            <div class="care-bg-photo" style="background-image: url('care_hero_bg.png');"></div>
+            <div class="care-bg-overlay"></div>
+
+            <div class="container position-relative z-1 py-5 my-md-4">
+
+                <!-- Section Header -->
+                <div class="row justify-content-center text-center fade-up mb-5 pb-4">
+                    <div class="col-lg-6">
+                        <span class="section-eyebrow-light fw-bold text-uppercase mb-3 d-block"
+                            style="letter-spacing: 2px; font-size: 0.75rem; color: rgba(255,255,255,0.5);">Our
+                            Services</span>
+                        <h2 class="display-5 fw-bolder text-white mb-3">Care Designed <span
+                                style="color: #7fb3e8;">Around You.</span></h2>
+                    </div>
+                </div>
+
+                <!-- Two column: Featured left + list right -->
+                <div class="row align-items-stretch g-5">
+
+                    <!-- Featured CTA -->
+                    <div class="col-lg-5 fade-up d-flex">
+                        <div class="care-featured-block w-100 d-flex flex-column justify-content-between">
+                            <!-- Shining icon -->
+                            <div class="care-feat-icon-wrap mb-4">
+                                <i class="ph-fill ph-calendar-plus"></i>
+                            </div>
+                            <div>
+                                <h3 class="fw-bolder text-white mb-3"
+                                    style="font-size: 2rem; font-family: var(--font-heading);">Book an Appointment</h3>
+                                <p class="mb-5 fw-medium lh-lg" style="color: rgba(255,255,255,0.65); font-size: 1rem;">
+                                    Easily schedule a visit with our renowned specialists at your convenience. Paperless
+                                    registration speeds up your experience when you arrive.</p>
+                                <a href="register.html"
+                                    class="care-book-btn d-inline-flex align-items-center gap-3 fw-bold text-decoration-none">
+                                    <span>Book Now</span>
+                                    <span class="care-btn-arrow d-flex align-items-center justify-content-center">
+                                        <i class="ph-bold ph-arrow-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                            <!-- Decoration line -->
+                            <div class="care-feat-line mt-5"></div>
+                        </div>
+                    </div>
+
+                    <!-- Services List -->
+                    <div class="col-lg-7 fade-up d-flex align-items-center" style="transition-delay: 0.15s;">
+                        <div class="care-list w-100">
+
+                            <div class="care-list-item">
+                                <div class="care-list-icon"><i class="ph-fill ph-user-circle"></i></div>
+                                <div class="care-list-text">
+                                    <h5 class="fw-bold text-white mb-1">Meet Your Doctor</h5>
+                                    <p class="mb-0 fw-medium" style="color: rgba(255,255,255,0.55); font-size: 0.9rem;">
+                                        Connect with experienced healthcare professionals dedicated to your wellbeing.
+                                    </p>
+                                </div>
+                                <div class="care-list-arrow"><i class="ph-bold ph-arrow-right"></i></div>
+                            </div>
+
+                            <div class="care-list-item" style="animation-delay: 0.1s;">
+                                <div class="care-list-icon"><i class="ph-fill ph-files"></i></div>
+                                <div class="care-list-text">
+                                    <h5 class="fw-bold text-white mb-1">Access Medical Records</h5>
+                                    <p class="mb-0 fw-medium" style="color: rgba(255,255,255,0.55); font-size: 0.9rem;">
+                                        View your test results and health history securely in our digital portal.</p>
+                                </div>
+                                <div class="care-list-arrow"><i class="ph-bold ph-arrow-right"></i></div>
+                            </div>
+
+                            <div class="care-list-item" style="animation-delay: 0.2s;">
+                                <div class="care-list-icon"><i class="ph-fill ph-pill"></i></div>
+                                <div class="care-list-text">
+                                    <h5 class="fw-bold text-white mb-1">Digital Prescriptions</h5>
+                                    <p class="mb-0 fw-medium" style="color: rgba(255,255,255,0.55); font-size: 0.9rem;">
+                                        Receive explicit, traceable electronic medication orders instantly.</p>
+                                </div>
+                                <div class="care-list-arrow"><i class="ph-bold ph-arrow-right"></i></div>
+                            </div>
+
+                            <div class="care-list-item" style="animation-delay: 0.3s;">
+                                <div class="care-list-icon"><i class="ph-fill ph-hospital"></i></div>
+                                <div class="care-list-text">
+                                    <h5 class="fw-bold text-white mb-1">Hospital Services</h5>
+                                    <p class="mb-0 fw-medium" style="color: rgba(255,255,255,0.55); font-size: 0.9rem;">
+                                        Explore modern clinical treatments and advanced care facilities.</p>
+                                </div>
+                                <div class="care-list-arrow"><i class="ph-bold ph-arrow-right"></i></div>
+                            </div>
+
+                            <div class="care-list-item border-0" style="animation-delay: 0.4s;">
+                                <div class="care-list-icon"><i class="ph-fill ph-lifebuoy"></i></div>
+                                <div class="care-list-text">
+                                    <h5 class="fw-bold text-white mb-1">Patient Support</h5>
+                                    <p class="mb-0 fw-medium" style="color: rgba(255,255,255,0.55); font-size: 0.9rem;">
+                                        Our care team is always alongside you, ready to help post-visit.</p>
+                                </div>
+                                <div class="care-list-arrow"><i class="ph-bold ph-arrow-right"></i></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- How it works (Patient Journey) -->
+        <section id="how-it-works" class="journey-section bg-white">
+            <div class="container">
+
+                <!-- Header -->
+                <div class="text-center journey-header">
+                    <span class="section-eyebrow text-primary fw-bold text-uppercase d-block mb-3"
+                        style="letter-spacing: 2px; font-size: 0.75rem;">How It Works</span>
+                    <h2 class="display-6 fw-bolder mb-0">Your Care Journey, <span class="text-primary">Made
+                            Simple.</span></h2>
+                </div>
+
+                <!-- Steps -->
+                <div class="journey-steps-row" id="journeySteps">
+
+                    <!-- Step 1 -->
+                    <div class="journey-step journey-step-anim" data-step="1">
+                        <!-- Connector line fills after step appears -->
+                        <div class="step-connector d-none d-lg-block">
+                            <div class="connector-fill"></div>
+                        </div>
+
+                        <div class="step-node-wrap">
+                            <div class="step-node">
+                                <i class="ph-fill ph-calendar-plus"></i>
+                            </div>
+                            <div class="step-pulse"></div>
+                        </div>
+
+                        <div class="step-content mt-4">
+                            <span class="step-num-label">01 — Book</span>
+                            <h4 class="fw-bold text-dark mt-3 mb-2">Choose a doctor and schedule your appointment.</h4>
+                            <p class="text-muted fw-medium small lh-base mb-0">Pick a specialist that suits your needs
+                                and book a time that works for you — entirely online.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="journey-step journey-step-anim" data-step="2">
+                        <div class="step-connector d-none d-lg-block">
+                            <div class="connector-fill"></div>
+                        </div>
+
+                        <div class="step-node-wrap">
+                            <div class="step-node">
+                                <i class="ph-fill ph-stethoscope"></i>
+                            </div>
+                            <div class="step-pulse"></div>
+                        </div>
+
+                        <div class="step-content mt-4">
+                            <span class="step-num-label">02 — Visit</span>
+                            <h4 class="fw-bold text-dark mt-3 mb-2">Meet with your doctor and receive the care you need.
+                            </h4>
+                            <p class="text-muted fw-medium small lh-base mb-0">Skip the paper forms. Check in digitally,
+                                meet your doctor, and focus on your wellbeing.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="journey-step journey-step-anim" data-step="3">
+                        <div class="step-node-wrap">
+                            <div class="step-node">
+                                <i class="ph-fill ph-device-mobile"></i>
+                            </div>
+                            <div class="step-pulse"></div>
+                        </div>
+
+                        <div class="step-content mt-4">
+                            <span class="step-num-label">03 — Stay Connected</span>
+                            <h4 class="fw-bold text-dark mt-3 mb-2">Access your records, prescriptions, and updates
+                                digitally.</h4>
+                            <p class="text-muted fw-medium small lh-base mb-0">Everything from your visit is available
+                                in your patient portal — anytime, anywhere.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Doctors / Care Team -->
+        <section class="section py-5 bg-white">
+            <div class="container py-5 my-md-4">
+                <div class="row align-items-end mb-5 fade-up">
+                    <div class="col-lg-6">
+                        <h2 class="display-6 fw-bolder mb-3">Care Starts With <span class="text-primary">People.</span>
+                        </h2>
+                        <p class="lead text-secondary fw-medium mb-0" style="font-size: 1.1rem; line-height: 1.6;">Our
+                            doctors and healthcare professionals work together to provide thoughtful, connected care.
+                        </p>
+                    </div>
+                    <div class="col-lg-6 text-lg-end mt-4 mt-lg-0">
+                        <a href="#about"
+                            class="btn btn-outline-secondary rounded-pill px-4 py-2 fw-semibold outline-btn-hero">Meet
+                            Our Care Team</a>
+                    </div>
+                </div>
+
+                <div class="row g-4 mt-2">
+                    <div class="col-md-4 fade-up">
+                        <div class="doctor-profile text-center group">
+                            <div class="rounded-4 overflow-hidden mb-3 position-relative shadow-sm doctor-img-wrap"
+                                style="aspect-ratio: 4/5; background: #e2e8f0;">
+                                <img src="ChatGPT Image2.png" alt="Doctor"
+                                    class="img-fluid w-100 h-100 object-fit-cover transition-hover"
+                                    onerror="this.src='https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=500&q=80';">
+                            </div>
+                            <h5 class="fw-bold text-dark mb-1">Dr. Sarah Jenkins</h5>
+                            <p class="text-primary fw-medium small mb-0">Cardiology Specialist</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 fade-up" style="transition-delay: 0.1s;">
+                        <div class="doctor-profile text-center group">
+                            <div class="rounded-4 overflow-hidden mb-3 position-relative shadow-sm doctor-img-wrap"
+                                style="aspect-ratio: 4/5; background: #e2e8f0;">
+                                <img src="ChatGPT.png" alt="Doctor"
+                                    class="img-fluid w-100 h-100 object-fit-cover transition-hover"
+                                    onerror="this.src='https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=500&q=80';">
+                            </div>
+                            <h5 class="fw-bold text-dark mb-1">Dr. Michael Chen</h5>
+                            <p class="text-primary fw-medium small mb-0">Neurology</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 fade-up" style="transition-delay: 0.2s;">
+                        <div class="doctor-profile text-center group">
+                            <div class="rounded-4 overflow-hidden mb-3 position-relative shadow-sm doctor-img-wrap"
+                                style="aspect-ratio: 4/5; background: #e2e8f0;">
+                                <img src="ChatGPT Image3.png" alt="Doctor"
+                                    class="img-fluid w-100 h-100 object-fit-cover transition-hover"
+                                    onerror="this.src='https://images.unsplash.com/photo-1594824436998-d7052064005b?auto=format&fit=crop&w=500&q=80';">
+                            </div>
+                            <h5 class="fw-bold text-dark mb-1">Dr. Elena Rodriguez</h5>
+                            <p class="text-primary fw-medium small mb-0">Pediatrics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Dynamic Transition / Transformation Section -->
+        <section class="section transformation pt-5 pb-5 overflow-hidden bg-white">
+            <div class="container py-5 mt-3">
+                <div class="row align-items-center justify-content-center text-center mb-5 pb-3 fade-up">
+                    <div class="col-lg-8">
+                        <h2 class="display-6 fw-bolder">From Paper Files to <span class="text-primary">Connected
+                                Care.</span></h2>
+                    </div>
+                </div>
+
+                <div class="row align-items-center fade-up position-relative transform-flow mt-3">
+                    <!-- Left: Traditional -->
+                    <div class="col-md-4 mb-5 mb-md-0 text-center text-md-end pe-md-5 position-relative z-1">
+                        <ul
+                            class="list-unstyled d-flex flex-column gap-4 mb-0 align-items-center align-items-md-end old-list">
+                            <li class="d-flex align-items-center gap-3 text-muted"><span
+                                    class="fw-medium font-heading">Paper files</span> <i
+                                    class="ph ph-file-text fs-3 text-muted opacity-50"></i></li>
+                            <li class="d-flex align-items-center gap-3 text-muted"><span
+                                    class="fw-medium font-heading">Handwritten prescriptions</span> <i
+                                    class="ph ph-pen-nib fs-3 text-muted opacity-50"></i></li>
+                            <li class="d-flex align-items-center gap-3 text-muted"><span
+                                    class="fw-medium font-heading">Appointment books</span> <i
+                                    class="ph ph-book-open fs-3 text-muted opacity-50"></i></li>
+                        </ul>
+                    </div>
+
+                    <!-- Center: Arrow Anim -->
+                    <div
+                        class="col-md-4 d-flex justify-content-center align-items-center position-relative mb-5 mb-md-0 z-0">
+                        <div class="flow-line-thin d-none d-md-block position-absolute w-100"
+                            style="height: 1px; background: linear-gradient(90deg, transparent, var(--color-primary), transparent);">
+                        </div>
+                        <div
+                            class="bg-white shadow-sm rounded-pill px-4 py-2 border d-flex align-items-center gap-3 z-1">
+                            <span class="text-muted fw-semibold small text-uppercase tracking-wider">Paper</span>
+                            <div class="arrows-animated text-primary d-flex align-items-center">
+                                <i class="ph-bold ph-caret-right"></i>
+                                <i class="ph-bold ph-caret-right"></i>
+                            </div>
+                            <span class="text-primary fw-bold small text-uppercase tracking-wider">Digital</span>
+                        </div>
+                    </div>
+
+                    <!-- Right: Digital -->
+                    <div class="col-md-4 text-center text-md-start ps-md-5 position-relative z-1">
+                        <ul
+                            class="list-unstyled d-flex flex-column gap-4 mb-0 align-items-center align-items-md-start new-list">
+                            <li class="d-flex align-items-center gap-3 text-dark"><i
+                                    class="ph-fill ph-folder-open fs-3 text-primary"></i> <span
+                                    class="fw-bold font-heading">Digital records</span></li>
+                            <li class="d-flex align-items-center gap-3 text-dark"><i
+                                    class="ph-fill ph-pill fs-3 text-primary"></i> <span
+                                    class="fw-bold font-heading">E-prescriptions</span></li>
+                            <li class="d-flex align-items-center gap-3 text-dark"><i
+                                    class="ph-fill ph-calendar-check fs-3 text-primary"></i> <span
+                                    class="fw-bold font-heading">Smart appointments</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust and Security section -->
+        <section class="section security-section py-5 bg-background border-top">
+            <div class="container py-5 my-md-2">
+                <div class="row align-items-center justify-content-center text-center fade-up mb-5">
+                    <div class="col-lg-6">
+                        <h2 class="display-6 fw-bolder mb-3">Your Health Information <span
+                                class="text-primary">Matters.</span></h2>
+                        <p class="text-secondary fw-medium">We built RANI to keep your private care details secure.</p>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center g-4">
+                    <div class="col-md-3 col-6 text-center fade-up">
+                        <i class="ph ph-lock-key text-primary fs-1 mb-3 opacity-75"></i>
+                        <h6 class="fw-bold">Secure Information</h6>
+                        <p class="small text-muted">Encrypted care records</p>
+                    </div>
+                    <div class="col-md-3 col-6 text-center fade-up" style="transition-delay: 0.1s;">
+                        <i class="ph ph-shield-check text-primary fs-1 mb-3 opacity-75"></i>
+                        <h6 class="fw-bold">Private Access</h6>
+                        <p class="small text-muted">You own your health data</p>
+                    </div>
+                    <div class="col-md-3 col-6 text-center fade-up" style="transition-delay: 0.2s;">
+                        <i class="ph ph-users text-primary fs-1 mb-3 opacity-75"></i>
+                        <h6 class="fw-bold">Role-Based Access</h6>
+                        <p class="small text-muted">Only assigned doctors view it</p>
+                    </div>
+                    <div class="col-md-3 col-6 text-center fade-up" style="transition-delay: 0.3s;">
+                        <i class="ph ph-cloud-check text-primary fs-1 mb-3 opacity-75"></i>
+                        <h6 class="fw-bold">Reliable Records</h6>
+                        <p class="small text-muted">Available whenever needed</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="section impact-section py-5 bg-white border-top">
+            <div class="container py-5 my-md-4 fade-up impact-container text-center">
+                <h2 class="display-6 fw-bolder mb-5 pb-3">Healthcare Without the <span
+                        class="text-primary">Paperwork.</span></h2>
+
+                <div class="row align-items-center justify-content-center g-5 pt-3">
+                    <div class="col-md-3 col-sm-6 text-center position-relative">
+                        <h3 class="display-4 fw-bolder text-primary mb-2 counter" data-target="1245" data-suffix="+">0+
+                        </h3>
+                        <p class="text-muted text-uppercase small fw-bold tracking-wide mb-0 font-heading"
+                            style="letter-spacing: 0.5px;">Patient Records</p>
+                        <div
+                            class="d-none d-md-block position-absolute end-0 top-50 translate-middle-y border-end h-50 border-light-subtle">
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 text-center position-relative">
+                        <h3 class="display-4 fw-bolder text-primary mb-2 counter" data-target="98" data-suffix="%">0%
+                        </h3>
+                        <p class="text-muted text-uppercase small fw-bold tracking-wide mb-0 font-heading"
+                            style="letter-spacing: 0.5px;">Digital Appointments</p>
+                        <div
+                            class="d-none d-md-block position-absolute end-0 top-50 translate-middle-y border-end h-50 border-light-subtle">
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 text-center position-relative">
+                        <h3 class="display-4 fw-bolder text-primary mb-2 counter" data-target="95" data-suffix="%">0%
+                        </h3>
+                        <p class="text-muted text-uppercase small fw-bold tracking-wide mb-0 font-heading"
+                            style="letter-spacing: 0.5px;">Electronic Prescriptions</p>
+                    </div>
+
+                    <div
+                        class="col-md-3 col-sm-6 d-flex flex-column align-items-center justify-content-center mt-5 mt-md-0 pt-4 pt-md-0 border-top border-md-0">
+                        <div class="position-relative d-inline-flex align-items-center justify-content-center mb-3">
+                            <svg viewBox="0 0 36 36" class="circular-chart" style="width: 80px; height: 80px;">
+                                <path class="circle-bg" stroke="#E5EDF6" stroke-width="2" fill="none"
+                                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <path class="circle" stroke="#3B82C4" stroke-width="2" fill="none"
+                                    stroke-linecap="round" stroke-dasharray="0, 100"
+                                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                    style="animation: progress 2s ease-out 0.5s forwards;" />
+                            </svg>
+                            <div class="position-absolute fw-bold text-dark fs-5 text-primary">92%</div>
+                        </div>
+                        <p class="text-muted text-uppercase small fw-bold tracking-wide mb-0 font-heading"
+                            style="letter-spacing: 0.5px;">Paperless Care Score</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA section -->
+        <!-- Final CTA section - Full Screen & Full Width -->
+        <section class="final-cta d-flex align-items-center justify-content-center text-center" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('cta_bg_hospital.png') center center / cover no-repeat; 
+                min-height: 100vh; 
+                width: 100%; 
+                margin: 0; 
+                padding: 0; 
+                position: relative; 
+                z-index: 1;">
+
+            <!-- Optional decorative overlay element for extra depth -->
+            <div
+                style="position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.2) 100%); z-index: 0;">
+            </div>
+
+            <div class="cta-content text-white px-3 position-relative" style="max-width: 850px; z-index: 2;">
+                <!-- Badge matching the "NURSES' STATION" from your image -->
+                <span class="badge bg-light text-dark rounded-pill px-4 py-2 mb-4 fw-bold" style="letter-spacing: 1.5px; 
+                     background: rgba(255, 255, 255, 0.1) !important; 
+                     backdrop-filter: blur(6px); 
+                     border: 1px solid rgba(255, 255, 255, 0.15); 
+                     font-size: 0.9rem; 
+                     text-transform: uppercase;">
+                    NURSES' STATION
+                </span>
+
+                <h2 class="display-4 fw-bolder mb-4 text-white" style="text-shadow: 0 4px 25px rgba(0,0,0,0.5);">
+                    Your Health Journey Starts Here.
+                </h2>
+
+                <p class="lead mb-5 text-white-50 fw-medium mx-auto"
+                    style="max-width: 600px; font-size: 1.25rem; text-shadow: 0 2px 12px rgba(0,0,0,0.4);">
+                    Book an appointment, connect with your care team, and experience a simpler way to manage your
+                    healthcare.
+                </p>
+
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="register.html"
+                        class="btn btn-light btn-lg rounded-pill px-5 py-3 fw-bold shadow-lg d-inline-flex align-items-center gap-2 transition-hover"
+                        style="color: #1F2D3D; background: #ffffff; border: none; transition: all 0.3s ease;">
+                        Book an Appointment <i class="ph-bold ph-arrow-right"></i>
+                    </a>
+                    <a href="login.html"
+                        class="btn btn-outline-light btn-lg rounded-pill px-5 py-3 fw-semibold d-inline-flex align-items-center gap-2 transition-hover"
+                        style="border-width: 2px; backdrop-filter: blur(4px); background: rgba(255, 255, 255, 0.05); transition: all 0.3s ease;">
+                        Sign In to RANI
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add a tiny bit of custom CSS to ensure smooth transitions -->
+        <style>
+            .final-cta .btn-light:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3) !important;
+                background: #f8f9fa !important;
+            }
+
+            .final-cta .btn-outline-light:hover {
+                transform: translateY(-4px);
+                background: rgba(255, 255, 255, 0.15) !important;
+                border-color: #ffffff !important;
+                color: #ffffff !important;
+            }
+
+            .final-cta .badge {
+                transition: all 0.3s ease;
+            }
+
+            .final-cta .badge:hover {
+                background: rgba(255, 255, 255, 0.2) !important;
+                transform: scale(1.02);
+            }
+        </style>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer bg-background pt-5 pb-4 border-top">
+        <div class="container pt-3">
+            <div class="row g-4 mb-5 pb-4 border-bottom border-light-subtle">
+                <div class="col-lg-4 col-md-6 pe-md-5">
+                    <a href="#" class="logo d-flex align-items-center gap-2 text-decoration-none mb-3">
+                        <div class="logo-icon d-flex align-items-center justify-content-center bg-primary rounded text-white shadow-sm"
+                            style="width: 32px; height: 32px;">
+                            <i class="ph-fill ph-heartbeat fs-5"></i>
+                        </div>
+                        <span class="fw-bold fs-5 text-dark" style="font-family: var(--font-heading);">RANI</span>
+                    </a>
+                    <p class="text-muted small fw-medium mt-3 lh-lg"
+                        style="color: #667085 !important; max-width: 250px;">Modern, connected, and patient-centered
+                        healthcare.</p>
+                </div>
+                <div class="col-lg-2 col-md-6 col-6">
+                    <h6 class="fw-bold mb-4 font-heading text-dark">Hospital</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-3 small fw-medium">
+                        <li><a href="#home"
+                                class="text-muted text-decoration-none hover-primary transition-hover">Home</a></li>
+                        <li><a href="#services"
+                                class="text-muted text-decoration-none hover-primary transition-hover">Our Care</a></li>
+                        <li><a href="#services"
+                                class="text-muted text-decoration-none hover-primary transition-hover">Services</a></li>
+                        <li><a href="#doctors"
+                                class="text-muted text-decoration-none hover-primary transition-hover">Doctors</a></li>
+                        <li><a href="#about"
+                                class="text-muted text-decoration-none hover-primary transition-hover">About</a></li>
+                        <li><a href="#contact"
+                                class="text-muted text-decoration-none hover-primary transition-hover">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 col-6">
+                    <h6 class="fw-bold mb-4 font-heading text-dark">For Patients</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-3 small fw-medium">
+                        <li><a href="register.html"
+                                class="text-primary text-decoration-none fw-bold transition-hover">Book Appointment</a>
+                        </li>
+                        <li><a href="login.html"
+                                class="text-muted text-decoration-none hover-primary transition-hover">Sign In</a></li>
+                        <li><a href="#records"
+                                class="text-muted text-decoration-none hover-primary transition-hover">Medical
+                                Records</a></li>
+                        <li><a href="#prescriptions"
+                                class="text-muted text-decoration-none hover-primary transition-hover">Prescriptions</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="fw-bold mb-4 font-heading text-dark">Support</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-3 small fw-medium">
+                        <li><a href="#help" class="text-muted text-decoration-none hover-primary transition-hover">Help
+                                Center</a></li>
+                        <li><a href="#contact"
+                                class="text-muted text-decoration-none hover-primary transition-hover">Contact RANI</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center d-flex flex-column flex-md-row justify-content-md-between align-items-center">
+                <p class="text-muted small mb-0 fw-medium" style="color: #94a3b8 !important;">&copy; 2026 RANI Hospital.
+                    All rights reserved.</p>
+                <div class="d-flex gap-3 mt-3 mt-md-0">
+                    <a href="#" class="text-muted hover-primary"><i class="ph-fill ph-facebook-logo fs-5"></i></a>
+                    <a href="#" class="text-muted hover-primary"><i class="ph-fill ph-twitter-logo fs-5"></i></a>
+                    <a href="#" class="text-muted hover-primary"><i class="ph-fill ph-instagram-logo fs-5"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

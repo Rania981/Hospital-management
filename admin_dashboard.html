@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal - RANI</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin_dashboard.css">
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="ph ph-heartbeat" style="font-size: 20px;"></i>
+                    </div>
+                    RANI
+                </a>
+                <div class="portal-label">ADMIN PORTAL</div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-target="dashboard-view">
+                    <i class="ph ph-squares-four"></i> Dashboard
+                </button>
+                <button class="nav-item" data-target="users-view">
+                    <i class="ph ph-users"></i> User Management
+                </button>
+                <button class="nav-item" data-target="patients-view">
+                    <i class="ph ph-user"></i> Patients
+                </button>
+                <button class="nav-item" data-target="doctors-view">
+                    <i class="ph ph-stethoscope"></i> Doctors
+                </button>
+                <button class="nav-item" data-target="staff-view">
+                    <i class="ph ph-identification-card"></i> Staff
+                </button>
+                <button class="nav-item" data-target="departments-view">
+                    <i class="ph ph-buildings"></i> Departments
+                </button>
+                <button class="nav-item" data-target="appointments-view">
+                    <i class="ph ph-calendar-check"></i> Appointments
+                </button>
+                <button class="nav-item" data-target="rooms-view">
+                    <i class="ph ph-bed"></i> Rooms & Beds
+                </button>
+                <button class="nav-item" data-target="records-view">
+                    <i class="ph ph-folder-user"></i> Medical Records
+                </button>
+                <button class="nav-item" data-target="prescriptions-view">
+                    <i class="ph ph-pill"></i> Prescriptions
+                </button>
+                <button class="nav-item" data-target="lab-view">
+                    <i class="ph ph-test-tube"></i> Laboratory
+                </button>
+                <button class="nav-item" data-target="billing-view">
+                    <i class="ph ph-credit-card"></i> Billing & Payments
+                </button>
+                <button class="nav-item" data-target="reports-view">
+                    <i class="ph ph-chart-pie-slice"></i> Reports & Analytics
+                </button>
+                <button class="nav-item" data-target="documents-view">
+                    <i class="ph ph-file-text"></i> Digital Documents
+                </button>
+                <button class="nav-item" data-target="notifications-view">
+                    <i class="ph ph-bell"></i> Notifications
+                </button>
+                <button class="nav-item" data-target="settings-view">
+                    <i class="ph ph-gear"></i> System Settings
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile" onclick="document.querySelector('[data-target=\'profile-view\']').click()">
+                    <img src="https://i.pravatar.cc/150?u=rania" alt="Admin">
+                    <div class="user-info">
+                        <span class="user-name">Rania Mohammed</span>
+                        <span class="user-role">System Admin</span>
+                    </div>
+                </div>
+                <button class="nav-item" style="margin-top: 12px; color: var(--color-error);" onclick="window.location.href='index.html'">
+                    <i class="ph ph-sign-out"></i> Logout
+                </button>
+                <!-- Hidden button for profile navigation -->
+                <button class="nav-item" data-target="profile-view" style="display:none;"></button>
+            </div>
+        </aside>
+
+        <!-- MAIN WORKSPACE -->
+        <main class="main-wrapper">
+            <!-- TOP NAVIGATION -->
+            <header class="top-nav">
+                <h2 class="page-title" id="page-title">Hospital Overview</h2>
+                
+                <div class="top-actions">
+                    <div class="search-bar">
+                        <i class="ph ph-magnifying-glass"></i>
+                        <input type="text" placeholder="Search patients, doctors, staff...">
+                    </div>
+                    
+                    <button class="icon-btn" onclick="document.querySelector('[data-target=\'notifications-view\']').click()">
+                        <i class="ph ph-bell"></i>
+                        <span class="badge"></span>
+                    </button>
+                    
+                    <div class="user-profile" onclick="document.querySelector('[data-target=\'profile-view\']').click()">
+                        <img src="https://i.pravatar.cc/150?u=rania" alt="Admin">
+                        <div class="user-info">
+                            <span class="user-name">Rania Mohammed</span>
+                            <span class="user-role">System Admin</span>
+                        </div>
+                        <i class="ph ph-caret-down" style="color: var(--color-text-secondary); margin-left: 8px;"></i>
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-content">
+                
+                <!-- 1. DASHBOARD VIEW -->
+                <div class="view active" id="dashboard-view">
+                    
+                    <div class="welcome-header">
+                        <div class="welcome-text">
+                            <h1>Good Morning, Rania 👋</h1>
+                            <p>Here is what is happening across your hospital today.</p>
+                        </div>
+                        <div class="date-status">
+                            <span class="date-text">Wednesday, September 2, 2026</span>
+                            <div class="status-indicator">
+                                <div class="dot"></div> Hospital Systems Operational
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-row">
+                        <div class="stat-card-compact">
+                            <div class="st-icon-title"><i class="ph-fill ph-users"></i> Total Patients</div>
+                            <div class="st-value">1,245</div>
+                            <div class="st-sub">+12 this week</div>
+                        </div>
+                        <div class="stat-card-compact">
+                            <div class="st-icon-title"><i class="ph-fill ph-stethoscope"></i> Active Doctors</div>
+                            <div class="st-value">42</div>
+                            <div class="st-sub neutral">Across 8 departments</div>
+                        </div>
+                        <div class="stat-card-compact">
+                            <div class="st-icon-title"><i class="ph-fill ph-calendar-check"></i> Appointments Today</div>
+                            <div class="st-value">87</div>
+                            <div class="st-sub neutral">23 remaining</div>
+                        </div>
+                        <div class="stat-card-compact">
+                            <div class="st-icon-title"><i class="ph-fill ph-bed"></i> Available Beds</div>
+                            <div class="st-value">32</div>
+                            <div class="st-sub neutral">Out of 80</div>
+                        </div>
+                        <div class="stat-card-compact">
+                            <div class="st-icon-title"><i class="ph-fill ph-test-tube"></i> Pending Labs</div>
+                            <div class="st-value" style="color: var(--color-warning);">14</div>
+                            <div class="st-sub warning">Requires attention</div>
+                        </div>
+                        <div class="stat-card-compact">
+                            <div class="st-icon-title"><i class="ph-fill ph-credit-card"></i> Today's Revenue</div>
+                            <div class="st-value">24,500 <span style="font-size: 0.9rem;">ETB</span></div>
+                            <div class="st-sub">Updated today</div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid-3">
+                        <div class="panel" style="grid-column: span 2;">
+                            <div class="panel-head">
+                                <h3>Hospital Activity</h3>
+                                <div class="chart-filters">
+                                    <button class="c-filter active">Today</button>
+                                    <button class="c-filter">Week</button>
+                                    <button class="c-filter">Month</button>
+                                    <button class="c-filter">Year</button>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="activityChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="panel">
+                            <div class="panel-head">
+                                <h3>Appointment Status</h3>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="appointmentChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid-3">
+                        <div class="paperless-card">
+                            <h3>Digital Hospital Progress</h3>
+                            <div class="circular-progress">
+                                <svg>
+                                    <circle class="bg" cx="60" cy="60" r="54"></circle>
+                                    <circle class="fg" cx="60" cy="60" r="54"></circle>
+                                </svg>
+                                <div class="cp-text">92%</div>
+                            </div>
+                            <p class="p-message" style="margin-bottom: 24px;">Paperless Workflow Progress</p>
+                            
+                            <div class="p-stats-list">
+                                <div class="p-stat-item">
+                                    <span>Digital Patient Records</span>
+                                    <span>1,245 / 1,300</span>
+                                </div>
+                                <div class="p-stat-item">
+                                    <span>Electronic Prescriptions</span>
+                                    <span>94%</span>
+                                </div>
+                                <div class="p-stat-item">
+                                    <span>Digital Appointments</span>
+                                    <span>98%</span>
+                                </div>
+                                <div class="p-stat-item">
+                                    <span>Digital Documents</span>
+                                    <span>89%</span>
+                                </div>
+                            </div>
+                            
+                            <p class="p-message">RANI is helping reduce paper-based workflows across the hospital.</p>
+                            <div class="p-visual">
+                                <i class="ph ph-file-text"></i> <i class="ph ph-arrow-right"></i> <i class="ph ph-laptop"></i> Paper to Digital
+                            </div>
+                        </div>
+
+                        <div class="panel" style="grid-column: span 2;">
+                            <div class="panel-head">
+                                <h3>Today's Hospital Operations</h3>
+                                <button class="btn-link">View Departments <i class="ph ph-arrow-right"></i></button>
+                            </div>
+                            <div class="data-table-container">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Department</th>
+                                            <th>Appointments</th>
+                                            <th>Patients</th>
+                                            <th>Doctors On Duty</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Cardiology</td>
+                                            <td>18</td>
+                                            <td>15</td>
+                                            <td>6</td>
+                                            <td><span class="status-badge operational">Operational</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>General Care</td>
+                                            <td>24</td>
+                                            <td>21</td>
+                                            <td>8</td>
+                                            <td><span class="status-badge operational">Operational</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dental</td>
+                                            <td>12</td>
+                                            <td>10</td>
+                                            <td>4</td>
+                                            <td><span class="status-badge operational">Operational</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Laboratory</td>
+                                            <td>16</td>
+                                            <td>14</td>
+                                            <td>5</td>
+                                            <td><span class="status-badge busy">Busy</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid-3">
+                        <div class="panel" style="grid-column: span 2;">
+                            <div class="panel-head">
+                                <h3>Recent Hospital Activity</h3>
+                            </div>
+                            <div class="activity-timeline">
+                                <div class="tl-item">
+                                    <div class="tl-icon"><i class="ph ph-user-plus"></i></div>
+                                    <div class="tl-content">
+                                        <div class="tl-title">New patient registered: Abel Tesfaye</div>
+                                        <div class="tl-sub">2 minutes ago</div>
+                                    </div>
+                                </div>
+                                <div class="tl-item">
+                                    <div class="tl-icon"><i class="ph ph-calendar-plus"></i></div>
+                                    <div class="tl-content">
+                                        <div class="tl-title">Appointment created: Dr. Ahmed Mohammed</div>
+                                        <div class="tl-sub">8 minutes ago</div>
+                                    </div>
+                                </div>
+                                <div class="tl-item">
+                                    <div class="tl-icon"><i class="ph ph-pill"></i></div>
+                                    <div class="tl-content">
+                                        <div class="tl-title">E-Prescription issued for Sara Mohammed</div>
+                                        <div class="tl-sub">15 minutes ago</div>
+                                    </div>
+                                </div>
+                                <div class="tl-item">
+                                    <div class="tl-icon"><i class="ph ph-flask"></i></div>
+                                    <div class="tl-content">
+                                        <div class="tl-title">Laboratory result uploaded: Complete Blood Count</div>
+                                        <div class="tl-sub">25 minutes ago</div>
+                                    </div>
+                                </div>
+                                <div class="tl-item">
+                                    <div class="tl-icon"><i class="ph ph-stethoscope"></i></div>
+                                    <div class="tl-content">
+                                        <div class="tl-title">New doctor added: Dr. Hana Bekele</div>
+                                        <div class="tl-sub">1 hour ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid" style="grid-template-columns: 1fr; gap: 24px; display: flex; flex-direction: column;">
+                            <div class="panel">
+                                <div class="panel-head">
+                                    <h3>Requires Attention</h3>
+                                </div>
+                                <div class="alerts-list">
+                                    <div class="alert-card error">
+                                        <div class="a-header"><i class="ph-fill ph-warning"></i> 14 lab tests pending review</div>
+                                        <button class="btn-link" style="color: var(--color-error);">View Laboratory <i class="ph ph-arrow-right"></i></button>
+                                    </div>
+                                    <div class="alert-card">
+                                        <div class="a-header"><i class="ph-fill ph-warning"></i> Cardiology has 2 beds available</div>
+                                        <button class="btn-link" style="color: var(--color-warning);">View Bed Management <i class="ph ph-arrow-right"></i></button>
+                                    </div>
+                                    <div class="alert-card">
+                                        <div class="a-header"><i class="ph-fill ph-warning"></i> 5 unconfirmed appointments</div>
+                                        <button class="btn-link" style="color: var(--color-warning);">View Appointments <i class="ph ph-arrow-right"></i></button>
+                                    </div>
+                                    <div class="alert-card">
+                                        <div class="a-header"><i class="ph-fill ph-warning"></i> 3 accounts require verification</div>
+                                        <button class="btn-link" style="color: var(--color-warning);">View Users <i class="ph ph-arrow-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel" style="flex: 1;">
+                                <div class="panel-head">
+                                    <h3>Quick Actions</h3>
+                                </div>
+                                <div class="qa-grid">
+                                    <button class="qa-btn primary" onclick="document.querySelector('[data-target=\'users-view\']').click()"><i class="ph ph-plus-circle"></i> Add New User</button>
+                                    <button class="qa-btn primary" onclick="document.querySelector('[data-target=\'doctors-view\']').click()"><i class="ph ph-plus-circle"></i> Add Doctor</button>
+                                    <button class="qa-btn"><i class="ph ph-buildings"></i> Add Department</button>
+                                    <button class="qa-btn"><i class="ph ph-bed"></i> Manage Beds</button>
+                                    <button class="qa-btn"><i class="ph ph-users"></i> Register Staff</button>
+                                    <button class="qa-btn"><i class="ph ph-file-text"></i> Gen Report</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. USER MANAGEMENT VIEW -->
+                <div class="view" id="users-view">
+                    <div class="panel-head">
+                        <h3>User Management</h3>
+                        <button class="btn btn-primary" style="padding: 10px 20px;"><i class="ph ph-plus"></i> Add New User</button>
+                    </div>
+                    
+                    <div class="tabs-nav">
+                        <button class="tab-btn active">All Users</button>
+                        <button class="tab-btn">Patients</button>
+                        <button class="tab-btn">Doctors</button>
+                        <button class="tab-btn">Receptionists</button>
+                        <button class="tab-btn">Admins</button>
+                    </div>
+                    
+                    <div class="filters-bar">
+                        <div class="search-bar" style="background: white;">
+                            <i class="ph ph-magnifying-glass"></i>
+                            <input type="text" placeholder="Search users...">
+                        </div>
+                        <div class="f-group">
+                            <select class="f-select"><option>Role</option><option>Doctor</option><option>Patient</option></select>
+                            <select class="f-select"><option>Status</option><option>Active</option><option>Inactive</option></select>
+                            <select class="f-select"><option>Department</option><option>Cardiology</option></select>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="data-table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Role</th>
+                                        <th>Department</th>
+                                        <th>Email</th>
+                                        <th>Status</th>
+                                        <th>Last Active</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Dr. Ahmed Mohammed</strong></td>
+                                        <td>Doctor</td>
+                                        <td>Cardiology</td>
+                                        <td>doctor@rani.com</td>
+                                        <td><span class="status-badge operational">Active</span></td>
+                                        <td>Today</td>
+                                        <td>
+                                            <div class="action-dd">
+                                                <button><i class="ph ph-eye"></i></button>
+                                                <button><i class="ph ph-pencil-simple"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Abel Tesfaye</strong></td>
+                                        <td>Patient</td>
+                                        <td>-</td>
+                                        <td>abel@mail.com</td>
+                                        <td><span class="status-badge operational">Active</span></td>
+                                        <td>Yesterday</td>
+                                        <td>
+                                            <div class="action-dd">
+                                                <button><i class="ph ph-eye"></i></button>
+                                                <button><i class="ph ph-pencil-simple"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. PATIENTS VIEW -->
+                <div class="view" id="patients-view">
+                    <div class="panel-head">
+                        <h3>Patient Management</h3>
+                    </div>
+                    <div class="stats-row" style="grid-template-columns: repeat(3, 1fr);">
+                        <div class="stat-card-compact"><div class="st-icon-title">Total Patients</div><div class="st-value">1,245</div></div>
+                        <div class="stat-card-compact"><div class="st-icon-title">New This Month</div><div class="st-value">128</div></div>
+                        <div class="stat-card-compact"><div class="st-icon-title">Active Patients</div><div class="st-value">1,180</div></div>
+                    </div>
+                    <div class="panel">
+                        <div class="filters-bar">
+                            <div class="search-bar" style="background: white;">
+                                <i class="ph ph-magnifying-glass"></i>
+                                <input type="text" placeholder="Search patients by ID or name...">
+                            </div>
+                        </div>
+                        <div class="data-table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Patient</th>
+                                        <th>Patient ID</th>
+                                        <th>Phone</th>
+                                        <th>Date Registered</th>
+                                        <th>Last Visit</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Abel Tesfaye</strong></td>
+                                        <td>RANI-2026-00125</td>
+                                        <td>+251 911 234 567</td>
+                                        <td>Aug 12, 2026</td>
+                                        <td>Today</td>
+                                        <td><span class="status-badge operational">Active</span></td>
+                                        <td><button class="btn-link">View Profile <i class="ph ph-arrow-right"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. DEPARTMENTS VIEW -->
+                <div class="view" id="departments-view">
+                    <div class="panel-head">
+                        <h3>Departments</h3>
+                        <button class="btn btn-primary" style="padding: 10px 20px;"><i class="ph ph-plus"></i> Add New Department</button>
+                    </div>
+                    
+                    <div class="cards-grid">
+                        <div class="dept-card">
+                            <div class="dc-header">
+                                <div class="dc-icon"><i class="ph ph-heartbeat"></i></div>
+                                <div class="dc-title">Cardiology</div>
+                            </div>
+                            <div class="dc-stats">
+                                <span><i class="ph ph-stethoscope"></i> 12 Doctors</span>
+                                <span><i class="ph ph-calendar"></i> 18 Appointments Today</span>
+                            </div>
+                            <span class="status-badge operational">Operational</span>
+                        </div>
+                        <div class="dept-card">
+                            <div class="dc-header">
+                                <div class="dc-icon"><i class="ph ph-bandaids"></i></div>
+                                <div class="dc-title">General Care</div>
+                            </div>
+                            <div class="dc-stats">
+                                <span><i class="ph ph-stethoscope"></i> 15 Doctors</span>
+                                <span><i class="ph ph-calendar"></i> 24 Appointments Today</span>
+                            </div>
+                            <span class="status-badge operational">Operational</span>
+                        </div>
+                        <div class="dept-card">
+                            <div class="dc-header">
+                                <div class="dc-icon"><i class="ph ph-tooth"></i></div>
+                                <div class="dc-title">Dental</div>
+                            </div>
+                            <div class="dc-stats">
+                                <span><i class="ph ph-stethoscope"></i> 8 Doctors</span>
+                                <span><i class="ph ph-calendar"></i> 12 Appointments Today</span>
+                            </div>
+                            <span class="status-badge operational">Operational</span>
+                        </div>
+                        <div class="dept-card">
+                            <div class="dc-header">
+                                <div class="dc-icon"><i class="ph ph-brain"></i></div>
+                                <div class="dc-title">Neurology</div>
+                            </div>
+                            <div class="dc-stats">
+                                <span><i class="ph ph-stethoscope"></i> 7 Doctors</span>
+                                <span><i class="ph ph-calendar"></i> 9 Appointments Today</span>
+                            </div>
+                            <span class="status-badge operational">Operational</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. ROOMS AND BEDS VIEW -->
+                <div class="view" id="rooms-view">
+                    <div class="panel-head">
+                        <h3>Rooms & Beds</h3>
+                        <div class="action-dd">
+                            <button class="btn btn-secondary" style="padding: 10px 20px;"><i class="ph ph-plus"></i> Add Room</button>
+                            <button class="btn btn-primary" style="padding: 10px 20px;"><i class="ph ph-plus"></i> Add Bed</button>
+                        </div>
+                    </div>
+                    <div class="stats-row" style="grid-template-columns: repeat(4, 1fr);">
+                        <div class="stat-card-compact"><div class="st-icon-title">Total Beds</div><div class="st-value">80</div></div>
+                        <div class="stat-card-compact"><div class="st-icon-title">Available</div><div class="st-value" style="color: var(--color-success);">32</div></div>
+                        <div class="stat-card-compact"><div class="st-icon-title">Occupied</div><div class="st-value" style="color: var(--color-warning);">42</div></div>
+                        <div class="stat-card-compact"><div class="st-icon-title">Maintenance</div><div class="st-value" style="color: var(--color-error);">6</div></div>
+                    </div>
+                    
+                    <div class="rooms-container">
+                        <div class="room-card">
+                            <div class="room-header"><span>Room 101 (Cardiology)</span></div>
+                            <div class="beds-grid">
+                                <div class="bed-item occupied"><i class="ph-fill ph-bed"></i> Bed 1<br>Occupied</div>
+                                <div class="bed-item available"><i class="ph ph-bed"></i> Bed 2<br>Available</div>
+                                <div class="bed-item available"><i class="ph ph-bed"></i> Bed 3<br>Available</div>
+                                <div class="bed-item occupied"><i class="ph-fill ph-bed"></i> Bed 4<br>Occupied</div>
+                            </div>
+                        </div>
+                        <div class="room-card">
+                            <div class="room-header"><span>Room 102 (General Care)</span></div>
+                            <div class="beds-grid">
+                                <div class="bed-item available"><i class="ph ph-bed"></i> Bed 1<br>Available</div>
+                                <div class="bed-item maintenance"><i class="ph-fill ph-wrench"></i> Bed 2<br>Maint.</div>
+                                <div class="bed-item occupied"><i class="ph-fill ph-bed"></i> Bed 3<br>Occupied</div>
+                                <div class="bed-item occupied"><i class="ph-fill ph-bed"></i> Bed 4<br>Occupied</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 16. SETTINGS & PERMISSIONS VIEW -->
+                <div class="view" id="settings-view">
+                    <div class="panel-head">
+                        <h3>System Settings</h3>
+                    </div>
+                    
+                    <div class="settings-grid">
+                        <div class="panel" style="padding: 16px;">
+                            <div class="settings-nav">
+                                <div class="settings-nav-item active">Roles & Permissions</div>
+                                <div class="settings-nav-item">General Settings</div>
+                                <div class="settings-nav-item">Hospital Information</div>
+                                <div class="settings-nav-item">Security</div>
+                                <div class="settings-nav-item">Paperless Workflow Settings</div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <h3 style="margin-bottom: 20px;">Role & Permission Management</h3>
+                            <div class="data-table-container">
+                                <table class="data-table perm-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Permission</th>
+                                            <th>Admin</th>
+                                            <th>Doctor</th>
+                                            <th>Receptionist</th>
+                                            <th>Patient</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>View Patients</td>
+                                            <td><i class="ph-bold ph-check perm-check"></i></td>
+                                            <td><i class="ph-bold ph-check perm-check"></i></td>
+                                            <td><i class="ph-bold ph-check perm-check"></i></td>
+                                            <td><span class="perm-cross">—</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Create Medical Records</td>
+                                            <td><span class="perm-cross">—</span></td>
+                                            <td><i class="ph-bold ph-check perm-check"></i></td>
+                                            <td><span class="perm-cross">—</span></td>
+                                            <td><span class="perm-cross">—</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Manage Users</td>
+                                            <td><i class="ph-bold ph-check perm-check"></i></td>
+                                            <td><span class="perm-cross">—</span></td>
+                                            <td><span class="perm-cross">—</span></td>
+                                            <td><span class="perm-cross">—</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>System Settings</td>
+                                            <td><i class="ph-bold ph-check perm-check"></i></td>
+                                            <td><span class="perm-cross">—</span></td>
+                                            <td><span class="perm-cross">—</span></td>
+                                            <td><span class="perm-cross">—</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAPERLESS WORKFLOW VISUAL (Can be placed in a dedicated view or part of reports) -->
+                <div class="view" id="documents-view">
+                    <div class="panel-head">
+                        <h3>Digital Documents & Paperless Workflow</h3>
+                    </div>
+                    
+                    <div class="workflow-visual">
+                        <div class="wf-node">
+                            <div class="wf-icon"><i class="ph ph-identification-badge"></i></div>
+                            <div class="wf-label">Digital Reg.</div>
+                        </div>
+                        <div class="wf-line"></div>
+                        <div class="wf-node">
+                            <div class="wf-icon"><i class="ph ph-calendar-check"></i></div>
+                            <div class="wf-label">Smart Appt.</div>
+                        </div>
+                        <div class="wf-line"></div>
+                        <div class="wf-node">
+                            <div class="wf-icon"><i class="ph ph-stethoscope"></i></div>
+                            <div class="wf-label">Consultation</div>
+                        </div>
+                        <div class="wf-line"></div>
+                        <div class="wf-node">
+                            <div class="wf-icon"><i class="ph ph-laptop"></i></div>
+                            <div class="wf-label">Electronic Record</div>
+                        </div>
+                        <div class="wf-line"></div>
+                        <div class="wf-node">
+                            <div class="wf-icon"><i class="ph ph-pill"></i></div>
+                            <div class="wf-label">E-Prescription</div>
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 24px; color: var(--color-text-secondary); font-weight: 500;">
+                        One Connected Digital Hospital. No unnecessary paper files.
+                    </p>
+                    
+                    <div class="panel" style="margin-top: 32px;">
+                        <div class="filters-bar">
+                            <h3 style="margin: 0; font-size: 1.1rem;">Secure Document Storage</h3>
+                            <div class="search-bar" style="background: white;">
+                                <i class="ph ph-magnifying-glass"></i>
+                                <input type="text" placeholder="Search Documents...">
+                            </div>
+                        </div>
+                        <div class="data-table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Document Name</th>
+                                        <th>Patient</th>
+                                        <th>Type</th>
+                                        <th>Created Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><i class="ph-fill ph-file-pdf" style="color: #e53e3e; margin-right: 8px;"></i> Lab_Report_001.pdf</td>
+                                        <td>Abel Tesfaye</td>
+                                        <td>Lab Report</td>
+                                        <td>Today</td>
+                                        <td><button class="btn-link">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="ph-fill ph-file-text" style="color: var(--color-primary); margin-right: 8px;"></i> Prescription_012.pdf</td>
+                                        <td>Sara Mohammed</td>
+                                        <td>E-Prescription</td>
+                                        <td>Yesterday</td>
+                                        <td><button class="btn-link">View</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Placeholder for other views (Doctors, Staff, Appointments, Lab, Billing, Reports, Notifications, Profile) -->
+                <div class="view" id="doctors-view"><div class="panel"><h3>Doctor Management</h3><p>Content goes here.</p></div></div>
+                <div class="view" id="staff-view"><div class="panel"><h3>Staff Management</h3><p>Content goes here.</p></div></div>
+                <div class="view" id="appointments-view"><div class="panel"><h3>Appointment Management</h3><p>Content goes here.</p></div></div>
+                <div class="view" id="records-view"><div class="panel"><h3>Medical Records</h3><p>Content goes here.</p></div></div>
+                <div class="view" id="prescriptions-view"><div class="panel"><h3>Prescriptions</h3><p>Content goes here.</p></div></div>
+                <div class="view" id="lab-view"><div class="panel"><h3>Laboratory Management</h3><p>Content goes here.</p></div></div>
+                <div class="view" id="billing-view"><div class="panel"><h3>Billing & Payments</h3><p>Content goes here.</p></div></div>
+                <div class="view" id="reports-view"><div class="panel"><h3>Reports & Analytics</h3><p>Content goes here.</p></div></div>
+                <div class="view" id="notifications-view"><div class="panel"><h3>Notifications</h3><p>Content goes here.</p></div></div>
+                <div class="view" id="profile-view"><div class="panel"><h3>Admin Profile</h3><p>Rania Mohammed - System Administrator</p></div></div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="admin_dashboard.js"></script>
+</body>
+</html>
