@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Remove active from all nav items
             navItems.forEach(nav => nav.classList.remove('active'));
             // Add active to clicked nav item
-            if(!item.style.display) { // don't add active to hidden profile button
+            if (!item.style.display) { // don't add active to hidden profile button
                 item.classList.add('active');
             } else {
                 // If profile was clicked from header or footer, maybe highlight dashboard or nothing.
@@ -25,10 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetView = document.getElementById(targetId);
             if (targetView) {
                 targetView.classList.add('active');
-                
+
                 // Update Page Title based on sidebar text
                 const text = item.textContent.trim();
-                if(text) {
+                if (text) {
                     pageTitle.textContent = text;
                 } else if (targetId === 'profile-view') {
                     pageTitle.textContent = 'Admin Profile';
@@ -154,5 +154,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+    }
+
+    // --- Logout Handling ---
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            sessionStorage.clear();
+            localStorage.removeItem('rani_active_user');
+            window.location.href = 'login.html';
+        });
     }
 });

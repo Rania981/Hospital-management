@@ -26,10 +26,10 @@
         <!-- LEFT SIDEBAR -->
         <aside class="sidebar">
             <div class="sidebar-header">
-                <div class="logo">
+                <a href="login.html" class="logo">
                     <div class="logo-icon"><i class="ph ph-heartbeat"></i></div>
                     RANI
-                </div>
+                </a>
                 <div class="portal-label">Patient Portal</div>
             </div>
 
@@ -70,7 +70,7 @@
                 <button class="nav-item" data-view="profile">
                     <i class="ph ph-user"></i> Profile
                 </button>
-                <button class="nav-item text-error" style="color: var(--color-error);">
+                <button class="nav-item text-error" id="logoutBtn" style="color: var(--color-error);">
                     <i class="ph ph-sign-out"></i> Logout
                 </button>
             </div>
@@ -138,7 +138,8 @@
                         </div>
                         <div class="stat-card" onclick="switchView('prescriptions')" style="cursor:pointer;">
                             <div class="stat-icon" style="color:var(--color-success); background:rgba(56,161,105,0.1);">
-                                <i class="ph-fill ph-pill"></i></div>
+                                <i class="ph-fill ph-pill"></i>
+                            </div>
                             <p>Active Prescriptions</p>
                             <h3>3</h3>
                             <span style="color:var(--color-text-secondary);">Currently active</span>
@@ -152,7 +153,8 @@
                         </div>
                         <div class="stat-card" onclick="switchView('bills')" style="cursor:pointer;">
                             <div class="stat-icon" style="color:var(--color-warning); background:rgba(221,107,32,0.1);">
-                                <i class="ph-fill ph-credit-card"></i></div>
+                                <i class="ph-fill ph-credit-card"></i>
+                            </div>
                             <p>Pending Bills</p>
                             <h3>850 ETB</h3>
                             <span style="color:var(--color-warning);">Payment required</span>

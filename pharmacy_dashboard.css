@@ -1,0 +1,129 @@
+/* Pharmacy Dashboard Custom Overrides */
+/* Extending dashboard.css and style.css nicely */
+
+:root {
+    --color-primary-deep: #1e3a8a;
+    /* Medical deep blue */
+    --color-primary: #3b82f6;
+    /* Medical blue */
+    --color-primary-soft: #eff6ff;
+    /* Soft blue */
+
+    --color-sidebar-active: var(--color-primary-soft);
+    --color-sidebar-text: #64748b;
+    --color-sidebar-text-active: var(--color-primary-deep);
+
+    --bg-danger-soft: #fef2f2;
+    --bg-warning-soft: #fffbeb;
+    --bg-success-soft: #f0fdf4;
+
+    --text-warning-dark: #b45309;
+}
+
+body {
+    background-color: #f8fafc;
+    /* Very light slate background */
+}
+
+/* Enhancing inputs and tables within Bootstrap */
+.custom-table th {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.custom-table td {
+    font-size: 0.95rem;
+    color: var(--color-text-primary);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.btn-primary-soft {
+    background-color: var(--color-primary-soft);
+    color: var(--color-primary-deep);
+    border: none;
+    font-weight: 500;
+}
+
+.btn-primary-soft:hover {
+    background-color: #dbeafe;
+    color: var(--color-primary-deep);
+}
+
+.bg-primary-soft {
+    background-color: var(--color-primary-soft) !important;
+}
+
+.bg-danger-soft {
+    background-color: var(--bg-danger-soft) !important;
+}
+
+.bg-warning-soft {
+    background-color: var(--bg-warning-soft) !important;
+}
+
+.bg-success-soft {
+    background-color: var(--bg-success-soft) !important;
+}
+
+.text-warning-dark {
+    color: var(--text-warning-dark) !important;
+}
+
+/* Custom Form Controls */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 0.25rem rgba(59, 130, 246, 0.25);
+}
+
+/* Sidebar toggler active states */
+.sidebar .nav-item {
+    font-size: 0.95rem;
+}
+
+.sidebar .nav-item.active {
+    background-color: var(--color-sidebar-active);
+    color: var(--color-sidebar-text-active);
+    font-weight: 600;
+    border-right: 3px solid var(--color-primary);
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+}
+
+/* Badge styling */
+.badge {
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+/* Detail page transitions */
+.view {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.view.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Toast container positioning */
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1060;
+}

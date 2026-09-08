@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Portal - RANI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Bootstrap CSS (needed since we want Bootstrap 5 for standard parts, though the custom CSS is heavy in the other UI. The prompt specifically asks for Bootstrap 5) -->
+    <!-- However, looking at admin_dashboard.html, they didn't include Bootstrap CSS directly. They used custom CSS entirely. To ensure PERFECT visual consistency, I should stick to their custom variables and layout, OR include bootstrap for structural grids/utilities if necessary. The prompt asks to use Bootstrap 5. Let's include Bootstrap 5 via CDN, but handle colors with custom css. -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="pharmacy_dashboard.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="login.html" class="logo text-decoration-none">
+                    <div class="logo-icon">
+                        <i class="ph ph-heartbeat" style="font-size: 20px;"></i>
+                    </div>
+                    RANI
+                </a>
+                <div class="portal-label">PHARMACY PORTAL</div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-target="dashboard-view">
+                    <i class="ph ph-squares-four"></i> Dashboard
+                </button>
+                <button class="nav-item" data-target="prescriptions-view">
+                    <i class="ph ph-prescription"></i> Prescriptions
+                </button>
+                <button class="nav-item" data-target="dispensing-view">
+                    <i class="ph ph-pill"></i> Dispensing
+                </button>
+                <button class="nav-item" data-target="inventory-view">
+                    <i class="ph ph-package"></i> Inventory
+                </button>
+                <button class="nav-item" data-target="medicines-view">
+                    <i class="ph ph-first-aid"></i> Medicines
+                </button>
+                <button class="nav-item" data-target="stock-movements-view">
+                    <i class="ph ph-arrows-left-right"></i> Stock Movements
+                </button>
+                <button class="nav-item" data-target="suppliers-view">
+                    <i class="ph ph-truck"></i> Suppliers
+                </button>
+                <button class="nav-item" data-target="purchase-orders-view">
+                    <i class="ph ph-receipt"></i> Purchase Orders
+                </button>
+                <button class="nav-item" data-target="returns-view">
+                    <i class="ph ph-arrow-u-up-left"></i> Returns
+                </button>
+                <button class="nav-item" data-target="patients-view">
+                    <i class="ph ph-users"></i> Patients
+                </button>
+                <button class="nav-item" data-target="billing-view">
+                    <i class="ph ph-credit-card"></i> Billing
+                </button>
+                <button class="nav-item" data-target="reports-view">
+                    <i class="ph ph-chart-line-up"></i> Reports
+                </button>
+                <button class="nav-item" data-target="notifications-view">
+                    <i class="ph ph-bell"></i> Notifications
+                </button>
+                <button class="nav-item" data-target="settings-view">
+                    <i class="ph ph-gear"></i> Settings
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile" id="pharmacist-profile-btn">
+                    <img src="https://i.pravatar.cc/150?u=pharmacist" alt="Pharmacist">
+                    <div class="user-info">
+                        <span class="user-name">Dr. Samuel</span>
+                        <span class="user-role">Pharmacist</span>
+                    </div>
+                </div>
+                <button class="nav-item" id="logoutBtn"
+                    style="margin-top: 12px; color: var(--color-error); background:none; border:none; width:100%; text-align:left;">
+                    <i class="ph ph-sign-out"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN WORKSPACE -->
+        <main class="main-wrapper">
+            <!-- TOP NAVIGATION -->
+            <header class="top-nav px-4">
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn btn-light d-md-none" id="sidebarToggle">
+                        <i class="ph ph-list"></i>
+                    </button>
+                    <h2 class="page-title m-0" id="page-title">Pharmacy Overview</h2>
+                    <span
+                        class="badge bg-primary-soft text-primary ms-3 d-none d-md-inline-flex align-items-center gap-1">
+                        <i class="ph ph-storefront"></i> Main Dept
+                    </span>
+                </div>
+
+                <div class="top-actions">
+                    <div class="search-bar d-none d-lg-flex">
+                        <i class="ph ph-magnifying-glass"></i>
+                        <input type="text" placeholder="Search medicines, prescriptions...">
+                    </div>
+
+                    <button class="icon-btn position-relative" data-target="notifications-view">
+                        <i class="ph ph-bell"></i>
+                        <span
+                            class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                            <span class="visually-hidden">New alerts</span>
+                        </span>
+                    </button>
+
+                    <div class="user-profile">
+                        <img src="https://i.pravatar.cc/150?u=pharmacist" alt="Pharmacist">
+                        <div class="user-info d-none d-md-flex">
+                            <span class="user-name">Dr. Samuel</span>
+                            <span class="user-role">Pharmacist</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-content" id="main-content">
+                <!-- Views will be populated here -->
+
+                <!-- 1. DASHBOARD VIEW -->
+                <div class="view active" id="dashboard-view">
+                    <div class="welcome-header mb-4 d-flex justify-content-between align-items-center">
+                        <div class="welcome-text">
+                            <h1 class="h3 fw-bold mb-1 text-primary-deep">Good morning, Pharmacist 👋</h1>
+                            <p class="text-secondary mb-0">Here's what's happening in your pharmacy today.</p>
+                        </div>
+                        <div class="text-end d-none d-md-block">
+                            <div class="fw-medium text-dark" id="current-date"></div>
+                        </div>
+                    </div>
+
+                    <!-- Stat Cards -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-12 col-sm-6 col-xl-4">
+                            <div class="stat-card">
+                                <div class="stat-icon text-primary"><i class="ph-fill ph-pill"></i></div>
+                                <h3 class="mb-1">1,248</h3>
+                                <p class="text-secondary mb-1">Total Medicines</p>
+                                <span class="text-success"><i class="ph ph-trend-up"></i> In Good standing</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-xl-4">
+                            <div class="stat-card">
+                                <div class="stat-icon text-warning" style="background: rgba(245, 158, 11, 0.1);"><i
+                                        class="ph-fill ph-file-text"></i></div>
+                                <h3 class="mb-1">24</h3>
+                                <p class="text-secondary mb-1">Pending Prescriptions</p>
+                                <span class="text-warning"><i class="ph ph-clock"></i> Requires attention</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-xl-4">
+                            <div class="stat-card">
+                                <div class="stat-icon text-danger" style="background: rgba(239, 68, 68, 0.1);"><i
+                                        class="ph-fill ph-warning"></i></div>
+                                <h3 class="mb-1">18</h3>
+                                <p class="text-secondary mb-1">Low Stock Items</p>
+                                <span class="text-danger"><i class="ph ph-warning-circle"></i> Need reorder</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-xl-4">
+                            <div class="stat-card">
+                                <div class="stat-icon text-danger" style="background: rgba(239, 68, 68, 0.1);"><i
+                                        class="ph-fill ph-calendar-x"></i></div>
+                                <h3 class="mb-1">5</h3>
+                                <p class="text-secondary mb-1">Expiring Soon</p>
+                                <span class="text-danger"><i class="ph ph-calendar"></i> Within 30 days</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-xl-4">
+                            <div class="stat-card">
+                                <div class="stat-icon text-success" style="background: rgba(16, 185, 129, 0.1);"><i
+                                        class="ph-fill ph-currency-circle-dollar"></i></div>
+                                <h3 class="mb-1">15,400 <small class="fs-6">ETB</small></h3>
+                                <p class="text-secondary mb-1">Today's Sales</p>
+                                <span class="text-success"><i class="ph ph-trend-up"></i> +12% from yesterday</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-xl-4">
+                            <div class="stat-card">
+                                <div class="stat-icon text-info" style="background: rgba(14, 165, 233, 0.1);"><i
+                                        class="ph-fill ph-shopping-cart"></i></div>
+                                <h3 class="mb-1">86</h3>
+                                <p class="text-secondary mb-1">Dispensed Today</p>
+                                <span class="text-success"><i class="ph ph-trend-up"></i> +4 from yesterday</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Two column layout for bottom section -->
+                    <div class="row g-4">
+                        <!-- Critical Alerts -->
+                        <div class="col-12 col-xl-4">
+                            <div class="panel h-100 p-4 bg-white rounded-4 border">
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <h3 class="h5 m-0 fw-bold">Critical Alerts</h3>
+                                </div>
+                                <div class="alerts-list d-flex flex-column gap-3">
+                                    <div
+                                        class="alert px-3 py-2 m-0 bg-danger-soft border-danger border border-opacity-25 rounded-3 d-flex align-items-start gap-2">
+                                        <i class="ph-fill ph-warning text-danger mt-1"></i>
+                                        <div>
+                                            <div class="fw-semibold text-danger">Amoxicillin 500mg is running low.</div>
+                                            <div class="small text-danger opacity-75">Only 12 strips remaining.</div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="alert px-3 py-2 m-0 bg-warning-soft border-warning border border-opacity-25 rounded-3 d-flex align-items-start gap-2">
+                                        <i class="ph-fill ph-clock text-warning mt-1"></i>
+                                        <div>
+                                            <div class="fw-semibold text-warning-dark">5 medicine batches expire within
+                                                30 days.</div>
+                                            <a href="#"
+                                                class="small fw-bold text-warning-dark text-decoration-none">Review
+                                                items</a>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="alert px-3 py-2 m-0 bg-danger-soft border-danger border border-opacity-25 rounded-3 d-flex align-items-start gap-2">
+                                        <i class="ph-fill ph-x-circle text-danger mt-1"></i>
+                                        <div>
+                                            <div class="fw-semibold text-danger">2 medicines are already expired.</div>
+                                            <div class="small text-danger opacity-75">Immediate removal required.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Prescriptions Quick View -->
+                        <div class="col-12 col-xl-8">
+                            <div class="panel h-100 p-4 bg-white rounded-4 border">
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <h3 class="h5 m-0 fw-bold">Recent Prescriptions</h3>
+                                    <button class="btn btn-sm btn-light" onclick="showView('prescriptions-view')">View
+                                        All</button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle mb-0 custom-table">
+                                        <thead class="table-light text-secondary">
+                                            <tr>
+                                                <th>Patient</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                                <th class="text-end">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="fw-semibold">Abel Tesfaye</div>
+                                                    <div class="small text-secondary">ID: PT-00125</div>
+                                                </td>
+                                                <td>10 mins ago</td>
+                                                <td><span
+                                                        class="badge bg-warning-soft text-warning px-2 py-1">Pending</span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <button class="btn btn-sm btn-primary-soft btn-view-prescription"
+                                                        data-id="1">Dispense</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="fw-semibold">Sara Mohammed</div>
+                                                    <div class="small text-secondary">ID: PT-00342</div>
+                                                </td>
+                                                <td>1 hr ago</td>
+                                                <td><span
+                                                        class="badge bg-warning-soft text-warning px-2 py-1">Processing</span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <button class="btn btn-sm btn-primary-soft btn-view-prescription"
+                                                        data-id="2">Resume</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="fw-semibold">Dawit Yilma</div>
+                                                    <div class="small text-secondary">ID: PT-00891</div>
+                                                </td>
+                                                <td>2 hrs ago</td>
+                                                <td><span
+                                                        class="badge bg-success-soft text-success px-2 py-1">Dispensed</span>
+                                                </td>
+                                                <td class="text-end">
+                                                    <button class="btn btn-sm btn-light btn-view-prescription"
+                                                        data-id="3">View</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. PRESCRIPTIONS VIEW -->
+                <div class="view" id="prescriptions-view">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="h4 fw-bold m-0 text-primary-deep">Prescriptions</h2>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-secondary d-flex align-items-center gap-2">
+                                <i class="ph ph-funnel"></i> Filter
+                            </button>
+                            <button class="btn btn-primary d-flex align-items-center gap-2">
+                                <i class="ph ph-plus"></i> New Prescription
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="panel bg-white rounded-4 border p-4">
+                        <!-- Filters -->
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i
+                                            class="ph ph-magnifying-glass"></i></span>
+                                    <input type="text" class="form-control border-start-0 ps-0"
+                                        placeholder="Search patient or ID...">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-select">
+                                    <option value="">Status</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="dispensed">Dispensed</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="date" class="form-control">
+                            </div>
+                        </div>
+
+                        <!-- Table -->
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle custom-table">
+                                <thead class="table-light text-secondary">
+                                    <tr>
+                                        <th>Prescription ID</th>
+                                        <th>Patient</th>
+                                        <th>Doctor</th>
+                                        <th>Medicines</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th class="text-end">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-medium text-primary">RX-2026-0891</td>
+                                        <td>Abel Tesfaye</td>
+                                        <td>Dr. Ahmed Mohammed</td>
+                                        <td>3 items</td>
+                                        <td>Sep 08, 2026</td>
+                                        <td><span class="badge bg-warning-soft text-warning px-2 py-1">Pending</span>
+                                        </td>
+                                        <td class="text-end">
+                                            <button class="btn btn-sm btn-primary-soft btn-view-prescription"
+                                                data-id="1">View & Dispense</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-medium text-primary">RX-2026-0892</td>
+                                        <td>Sara Mohammed</td>
+                                        <td>Dr. Hana Bekele</td>
+                                        <td>1 item</td>
+                                        <td>Sep 08, 2026</td>
+                                        <td><span class="badge bg-warning-soft text-warning px-2 py-1">Processing</span>
+                                        </td>
+                                        <td class="text-end">
+                                            <button class="btn btn-sm btn-primary-soft btn-view-prescription"
+                                                data-id="2">View</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-medium text-primary">RX-2026-0885</td>
+                                        <td>Belete Alemu</td>
+                                        <td>Dr. Samuel</td>
+                                        <td>2 items</td>
+                                        <td>Sep 07, 2026</td>
+                                        <td><span class="badge bg-success-soft text-success px-2 py-1">Dispensed</span>
+                                        </td>
+                                        <td class="text-end">
+                                            <button class="btn btn-sm btn-light btn-view-prescription"
+                                                data-id="3">Details</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. INVENTORY VIEW -->
+                <div class="view" id="inventory-view">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="h4 fw-bold m-0 text-primary-deep">Inventory Management</h2>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-outline-secondary d-flex align-items-center gap-2">
+                                <i class="ph ph-export"></i> Export
+                            </button>
+                            <button class="btn btn-primary d-flex align-items-center gap-2 btn-add-stock">
+                                <i class="ph ph-plus"></i> Add Stock Menu
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Inventory Summary Cards -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-sm-6 col-md-3">
+                            <div class="p-3 bg-white rounded-3 border d-flex align-items-center gap-3">
+                                <div class="p-2 bg-primary-soft text-primary rounded-circle"><i
+                                        class="ph-fill ph-pill fs-4"></i></div>
+                                <div>
+                                    <div class="text-secondary small fw-medium">Total Items</div>
+                                    <div class="h5 m-0 fw-bold">1,248</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="p-3 bg-white rounded-3 border d-flex align-items-center gap-3">
+                                <div class="p-2 bg-success-soft text-success rounded-circle"><i
+                                        class="ph-fill ph-check-circle fs-4"></i></div>
+                                <div>
+                                    <div class="text-secondary small fw-medium">In Stock</div>
+                                    <div class="h5 m-0 fw-bold">1,225</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div
+                                class="p-3 bg-danger-soft border border-danger border-opacity-25 rounded-3 d-flex align-items-center gap-3">
+                                <div class="p-2 bg-white text-danger rounded-circle"><i
+                                        class="ph-fill ph-warning fs-4"></i></div>
+                                <div>
+                                    <div class="text-danger small fw-medium">Low Stock</div>
+                                    <div class="h5 m-0 fw-bold text-danger">18</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <div
+                                class="p-3 bg-warning-soft border border-warning border-opacity-25 rounded-3 d-flex align-items-center gap-3">
+                                <div class="p-2 bg-white text-warning rounded-circle"><i
+                                        class="ph-fill ph-calendar-x fs-4"></i></div>
+                                <div>
+                                    <div class="text-warning-dark small fw-medium">Expiring Soon</div>
+                                    <div class="h5 m-0 fw-bold text-warning-dark">5</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel bg-white rounded-4 border p-4">
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i
+                                            class="ph ph-magnifying-glass"></i></span>
+                                    <input type="text" class="form-control border-start-0 ps-0"
+                                        placeholder="Search medicines...">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-select">
+                                    <option value="">Category</option>
+                                    <option value="antibiotic">Antibiotic</option>
+                                    <option value="painkiller">Painkiller</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-select">
+                                    <option value="">Stock Status</option>
+                                    <option value="in-stock">In Stock</option>
+                                    <option value="low-stock">Low Stock</option>
+                                    <option value="out-of-stock">Out of Stock</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle custom-table">
+                                <thead class="table-light text-secondary">
+                                    <tr>
+                                        <th>Medicine</th>
+                                        <th>Category</th>
+                                        <th>Batch No.</th>
+                                        <th>Qty</th>
+                                        <th>Unit Price</th>
+                                        <th>Expiry Date</th>
+                                        <th>Status</th>
+                                        <th class="text-end">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="fw-semibold text-primary-deep">Amoxicillin 500mg</div>
+                                            <div class="small text-secondary">Generic: Amoxicillin</div>
+                                        </td>
+                                        <td>Antibiotic</td>
+                                        <td>B-10928</td>
+                                        <td class="fw-semibold text-danger">12 box</td>
+                                        <td>150 ETB</td>
+                                        <td>Dec 2027</td>
+                                        <td><span class="badge bg-danger-soft text-danger px-2 py-1">Low Stock</span>
+                                        </td>
+                                        <td class="text-end">
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm btn-light" data-bs-toggle="dropdown"><i
+                                                        class="ph ph-dots-three-outline-vertical"></i></button>
+                                                <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                                    <li><a class="dropdown-item" href="#"><i
+                                                                class="ph ph-eye me-2 text-secondary"></i> View</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i
+                                                                class="ph ph-plus-circle me-2 text-primary"></i> Add
+                                                            Stock</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i
+                                                                class="ph ph-sliders-horizontal me-2 text-warning"></i>
+                                                            Adjust Stock</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="fw-semibold text-primary-deep">Paracetamol 500mg</div>
+                                            <div class="small text-secondary">Generic: Acetaminophen</div>
+                                        </td>
+                                        <td>Painkiller</td>
+                                        <td>B-88371</td>
+                                        <td class="fw-semibold">1,240 box</td>
+                                        <td>50 ETB</td>
+                                        <td>Oct 2028</td>
+                                        <td><span class="badge bg-success-soft text-success px-2 py-1">In Stock</span>
+                                        </td>
+                                        <td class="text-end">
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm btn-light" data-bs-toggle="dropdown"><i
+                                                        class="ph ph-dots-three-outline-vertical"></i></button>
+                                                <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                                    <li><a class="dropdown-item" href="#"><i
+                                                                class="ph ph-eye me-2 text-secondary"></i> View</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i
+                                                                class="ph ph-plus-circle me-2 text-primary"></i> Add
+                                                            Stock</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i
+                                                                class="ph ph-sliders-horizontal me-2 text-warning"></i>
+                                                            Adjust Stock</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="fw-semibold text-primary-deep">Ibuprofen 400mg</div>
+                                            <div class="small text-secondary">Generic: Ibuprofen</div>
+                                        </td>
+                                        <td>Painkiller</td>
+                                        <td>B-50119</td>
+                                        <td class="fw-semibold">80 box</td>
+                                        <td>80 ETB</td>
+                                        <td class="text-danger fw-medium">Oct 2026</td>
+                                        <td><span class="badge bg-warning-soft text-warning px-2 py-1">Expiring
+                                                Soon</span></td>
+                                        <td class="text-end">
+                                            <div class="dropdown">
+                                                <button class="btn btn-sm btn-light" data-bs-toggle="dropdown"><i
+                                                        class="ph ph-dots-three-outline-vertical"></i></button>
+                                                <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                                                    <li><a class="dropdown-item" href="#"><i
+                                                                class="ph ph-eye me-2 text-secondary"></i> View</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i
+                                                                class="ph ph-plus-circle me-2 text-primary"></i> Add
+                                                            Stock</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i
+                                                                class="ph ph-sliders-horizontal me-2 text-warning"></i>
+                                                            Adjust Stock</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. PURCHASE ORDERS VIEW -->
+                <div class="view" id="purchase-orders-view">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="h4 fw-bold m-0 text-primary-deep">Purchase Orders</h2>
+                        <button class="btn btn-primary d-flex align-items-center gap-2">
+                            <i class="ph ph-plus"></i> Create PO
+                        </button>
+                    </div>
+                    <div class="panel bg-white rounded-4 border p-4">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle custom-table">
+                                <thead class="table-light text-secondary">
+                                    <tr>
+                                        <th>PO #</th>
+                                        <th>Supplier</th>
+                                        <th>Medicine</th>
+                                        <th>Expected Delivery</th>
+                                        <th>Total Cost</th>
+                                        <th>Status</th>
+                                        <th class="text-end">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-medium text-primary">PO-2026-001</td>
+                                        <td>PharmaCorp Ltd.</td>
+                                        <td>Amoxicillin 500mg, +2 more</td>
+                                        <td>Sep 12, 2026</td>
+                                        <td>45,000 ETB</td>
+                                        <td><span class="badge bg-warning-soft text-warning px-2 py-1">Pending</span>
+                                        </td>
+                                        <td class="text-end"><button class="btn btn-sm btn-light">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-medium text-primary">PO-2026-002</td>
+                                        <td>MedSupply Co.</td>
+                                        <td>Ibuprofen 400mg</td>
+                                        <td>Sep 10, 2026</td>
+                                        <td>12,500 ETB</td>
+                                        <td><span class="badge bg-success-soft text-success px-2 py-1">Received</span>
+                                        </td>
+                                        <td class="text-end"><button class="btn btn-sm btn-light">View</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. PATIENTS VIEW -->
+                <div class="view" id="patients-view">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="h4 fw-bold m-0 text-primary-deep">Patient Pharmacy History</h2>
+                    </div>
+                    <div class="panel bg-white rounded-4 border p-4">
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0"><i
+                                            class="ph ph-magnifying-glass"></i></span>
+                                    <input type="text" class="form-control border-start-0 ps-0"
+                                        placeholder="Search by patient name, ID, or phone...">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle custom-table">
+                                <thead class="table-light text-secondary">
+                                    <tr>
+                                        <th>Patient ID</th>
+                                        <th>Patient Name</th>
+                                        <th>Phone</th>
+                                        <th>Last Visit</th>
+                                        <th>Total Prescriptions</th>
+                                        <th class="text-end">History</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-medium text-primary">PT-00125</td>
+                                        <td>Abel Tesfaye</td>
+                                        <td>+251 911 234 567</td>
+                                        <td>Today</td>
+                                        <td>5</td>
+                                        <td class="text-end"><button class="btn btn-sm btn-primary-soft">View
+                                                Profile</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-medium text-primary">PT-00342</td>
+                                        <td>Sara Mohammed</td>
+                                        <td>+251 922 345 678</td>
+                                        <td>Sep 02, 2026</td>
+                                        <td>12</td>
+                                        <td class="text-end"><button class="btn btn-sm btn-primary-soft">View
+                                                Profile</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. BILLING VIEW -->
+                <div class="view" id="billing-view">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="h4 fw-bold m-0 text-primary-deep">Pharmacy Billing</h2>
+                        <button class="btn btn-primary d-flex align-items-center gap-2">
+                            <i class="ph ph-plus"></i> New Invoice
+                        </button>
+                    </div>
+                    <div class="panel bg-white rounded-4 border p-4">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle custom-table">
+                                <thead class="table-light text-secondary">
+                                    <tr>
+                                        <th>Invoice #</th>
+                                        <th>Patient</th>
+                                        <th>Date</th>
+                                        <th>Items</th>
+                                        <th>Total Amount</th>
+                                        <th>Status</th>
+                                        <th class="text-end">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-medium text-primary">INV-P-1001</td>
+                                        <td>Abel Tesfaye <small class="text-secondary d-block">RX-2026-0891</small></td>
+                                        <td>Today, 10:45 AM</td>
+                                        <td>3</td>
+                                        <td class="fw-bold">450.00 ETB</td>
+                                        <td><span class="badge bg-warning-soft text-warning px-2 py-1">Pending</span>
+                                        </td>
+                                        <td class="text-end">
+                                            <button
+                                                class="btn btn-sm btn-success d-inline-flex align-items-center gap-1"><i
+                                                    class="ph ph-check-circle"></i> Pay</button>
+                                            <button class="btn btn-sm btn-light"><i class="ph ph-printer"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-medium text-primary">INV-P-1000</td>
+                                        <td>Belete Alemu <small class="text-secondary d-block">RX-2026-0885</small></td>
+                                        <td>Yesterday</td>
+                                        <td>2</td>
+                                        <td class="fw-bold">280.00 ETB</td>
+                                        <td><span class="badge bg-success-soft text-success px-2 py-1">Paid</span></td>
+                                        <td class="text-end">
+                                            <button class="btn btn-sm btn-light"><i class="ph ph-eye"></i></button>
+                                            <button class="btn btn-sm btn-light"><i class="ph ph-printer"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. REPORTS VIEW -->
+                <div class="view" id="reports-view">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="h4 fw-bold m-0 text-primary-deep">Analytics & Reports</h2>
+                        <div class="d-flex gap-2">
+                            <select class="form-select">
+                                <option>Today</option>
+                                <option>This Week</option>
+                                <option>This Month</option>
+                                <option>This Year</option>
+                            </select>
+                            <button class="btn btn-outline-secondary d-flex align-items-center gap-2">
+                                <i class="ph ph-export"></i> Export PDF
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-md-8">
+                            <div class="panel bg-white rounded-4 border p-4 h-100">
+                                <h3 class="h5 fw-bold mb-4">Sales Overview</h3>
+                                <div
+                                    style="height: 300px; display:flex; align-items:center; justify-content:center; background:#f8fafc; border-radius: 8px;">
+                                    <span class="text-secondary"><i
+                                            class="ph ph-chart-bar fs-1 d-block text-center mb-2"></i>[ Chart.js Canvas
+                                        ] Daily Pharmacy Sales</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="panel bg-white rounded-4 border p-4 h-100">
+                                <h3 class="h5 fw-bold mb-4">Prescription Status</h3>
+                                <div
+                                    style="height: 300px; display:flex; align-items:center; justify-content:center; background:#f8fafc; border-radius: 8px;">
+                                    <span class="text-secondary"><i
+                                            class="ph ph-chart-pie-slice fs-1 d-block text-center mb-2"></i>[ Chart.js
+                                        Canvas ] Distribution</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modals will be appended by JS -->
+
+                <!-- Prescription Details Modal -->
+                <div class="modal fade" id="prescriptionModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content border-0 rounded-4 shadow-lg">
+                            <div class="modal-header border-bottom-0 pb-0">
+                                <h5 class="modal-title fw-bold text-primary-deep">Prescription Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-4">
+                                <div class="row mb-4">
+                                    <div class="col-md-6 border-end">
+                                        <h6 class="text-secondary text-uppercase fw-bold" style="font-size: 0.8rem;">
+                                            Patient Info</h6>
+                                        <div class="d-flex align-items-center gap-3 mt-2">
+                                            <div class="bg-primary-soft p-3 rounded-circle text-primary"><i
+                                                    class="ph-fill ph-user fs-4"></i></div>
+                                            <div>
+                                                <div class="fw-bold fs-5">Abel Tesfaye</div>
+                                                <div class="small text-secondary">ID: PT-00125 | 32 yrs | Male</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 ps-md-4">
+                                        <h6 class="text-secondary text-uppercase fw-bold" style="font-size: 0.8rem;">
+                                            Doctor Info</h6>
+                                        <div class="d-flex align-items-center gap-3 mt-2">
+                                            <div class="bg-light p-3 rounded-circle text-secondary"><i
+                                                    class="ph-fill ph-stethoscope fs-4"></i></div>
+                                            <div>
+                                                <div class="fw-bold">Dr. Ahmed Mohammed</div>
+                                                <div class="small text-secondary">Cardiology | Date: Sep 08, 2026</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h6 class="text-secondary text-uppercase fw-bold mb-3" style="font-size: 0.8rem;">
+                                    Prescribed Medicines</h6>
+                                <div class="table-responsive border rounded-3">
+                                    <table class="table table-hover align-middle m-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Medicine</th>
+                                                <th>Dosage</th>
+                                                <th>Frequency</th>
+                                                <th>Duration</th>
+                                                <th>Stock</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-semibold">Amoxicillin</td>
+                                                <td>500mg</td>
+                                                <td>1x3</td>
+                                                <td>5 Days</td>
+                                                <td><span class="badge bg-success-soft text-success">Avail (144)</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-semibold">Paracetamol</td>
+                                                <td>500mg</td>
+                                                <td>1x2 (PRN)</td>
+                                                <td>3 Days</td>
+                                                <td><span class="badge bg-success-soft text-success">Avail
+                                                        (1,240)</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer border-top-0 pt-0 px-4 pb-4">
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-outline-danger">Reject</button>
+                                <button type="button" class="btn btn-primary d-flex align-items-center gap-2"
+                                    id="btn-dispense">
+                                    <i class="ph ph-check-circle"></i> Approve & Dispense
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toast Notification Container -->
+                <div class="toast-container p-3" id="toastPlacement">
+                    <div id="liveToast" class="toast border-0 shadow" role="alert" aria-live="assertive"
+                        aria-atomic="true">
+                        <div class="toast-header border-0 bg-success text-white">
+                            <i class="ph-fill ph-check-circle me-2"></i>
+                            <strong class="me-auto">Success</strong>
+                            <small>Just now</small>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body bg-white text-dark rounded-bottom">
+                            Action completed successfully.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="pharmacy_dashboard.js"></script>
+</body>
+
+</html>

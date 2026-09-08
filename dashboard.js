@@ -23,6 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {
             switchView(viewName);
         });
     });
+
+    // Logout handler
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            sessionStorage.clear();
+            localStorage.removeItem('rani_active_user');
+            window.location.href = 'login.html';
+        });
+    }
 });
 
 function switchView(viewName) {

@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Portal - RANI</title>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
+
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="admin_dashboard.css">
 </head>
+
 <body>
 
     <div class="dashboard-layout">
         <!-- LEFT SIDEBAR -->
         <aside class="sidebar">
             <div class="sidebar-header">
-                <a href="index.html" class="logo">
+                <a href="login.html" class="logo">
                     <div class="logo-icon">
                         <i class="ph ph-heartbeat" style="font-size: 20px;"></i>
                     </div>
@@ -93,7 +97,7 @@
                         <span class="user-role">System Admin</span>
                     </div>
                 </div>
-                <button class="nav-item" style="margin-top: 12px; color: var(--color-error);" onclick="window.location.href='index.html'">
+                <button class="nav-item" id="logoutBtn" style="margin-top: 12px; color: var(--color-error);">
                     <i class="ph ph-sign-out"></i> Logout
                 </button>
                 <!-- Hidden button for profile navigation -->
@@ -106,19 +110,21 @@
             <!-- TOP NAVIGATION -->
             <header class="top-nav">
                 <h2 class="page-title" id="page-title">Hospital Overview</h2>
-                
+
                 <div class="top-actions">
                     <div class="search-bar">
                         <i class="ph ph-magnifying-glass"></i>
                         <input type="text" placeholder="Search patients, doctors, staff...">
                     </div>
-                    
-                    <button class="icon-btn" onclick="document.querySelector('[data-target=\'notifications-view\']').click()">
+
+                    <button class="icon-btn"
+                        onclick="document.querySelector('[data-target=\'notifications-view\']').click()">
                         <i class="ph ph-bell"></i>
                         <span class="badge"></span>
                     </button>
-                    
-                    <div class="user-profile" onclick="document.querySelector('[data-target=\'profile-view\']').click()">
+
+                    <div class="user-profile"
+                        onclick="document.querySelector('[data-target=\'profile-view\']').click()">
                         <img src="https://i.pravatar.cc/150?u=rania" alt="Admin">
                         <div class="user-info">
                             <span class="user-name">Rania Mohammed</span>
@@ -130,10 +136,10 @@
             </header>
 
             <div class="page-content">
-                
+
                 <!-- 1. DASHBOARD VIEW -->
                 <div class="view active" id="dashboard-view">
-                    
+
                     <div class="welcome-header">
                         <div class="welcome-text">
                             <h1>Good Morning, Rania 👋</h1>
@@ -159,7 +165,8 @@
                             <div class="st-sub neutral">Across 8 departments</div>
                         </div>
                         <div class="stat-card-compact">
-                            <div class="st-icon-title"><i class="ph-fill ph-calendar-check"></i> Appointments Today</div>
+                            <div class="st-icon-title"><i class="ph-fill ph-calendar-check"></i> Appointments Today
+                            </div>
                             <div class="st-value">87</div>
                             <div class="st-sub neutral">23 remaining</div>
                         </div>
@@ -217,7 +224,7 @@
                                 <div class="cp-text">92%</div>
                             </div>
                             <p class="p-message" style="margin-bottom: 24px;">Paperless Workflow Progress</p>
-                            
+
                             <div class="p-stats-list">
                                 <div class="p-stat-item">
                                     <span>Digital Patient Records</span>
@@ -236,10 +243,11 @@
                                     <span>89%</span>
                                 </div>
                             </div>
-                            
+
                             <p class="p-message">RANI is helping reduce paper-based workflows across the hospital.</p>
                             <div class="p-visual">
-                                <i class="ph ph-file-text"></i> <i class="ph ph-arrow-right"></i> <i class="ph ph-laptop"></i> Paper to Digital
+                                <i class="ph ph-file-text"></i> <i class="ph ph-arrow-right"></i> <i
+                                    class="ph ph-laptop"></i> Paper to Digital
                             </div>
                         </div>
 
@@ -338,27 +346,36 @@
                             </div>
                         </div>
 
-                        <div class="d-grid" style="grid-template-columns: 1fr; gap: 24px; display: flex; flex-direction: column;">
+                        <div class="d-grid"
+                            style="grid-template-columns: 1fr; gap: 24px; display: flex; flex-direction: column;">
                             <div class="panel">
                                 <div class="panel-head">
                                     <h3>Requires Attention</h3>
                                 </div>
                                 <div class="alerts-list">
                                     <div class="alert-card error">
-                                        <div class="a-header"><i class="ph-fill ph-warning"></i> 14 lab tests pending review</div>
-                                        <button class="btn-link" style="color: var(--color-error);">View Laboratory <i class="ph ph-arrow-right"></i></button>
+                                        <div class="a-header"><i class="ph-fill ph-warning"></i> 14 lab tests pending
+                                            review</div>
+                                        <button class="btn-link" style="color: var(--color-error);">View Laboratory <i
+                                                class="ph ph-arrow-right"></i></button>
                                     </div>
                                     <div class="alert-card">
-                                        <div class="a-header"><i class="ph-fill ph-warning"></i> Cardiology has 2 beds available</div>
-                                        <button class="btn-link" style="color: var(--color-warning);">View Bed Management <i class="ph ph-arrow-right"></i></button>
+                                        <div class="a-header"><i class="ph-fill ph-warning"></i> Cardiology has 2 beds
+                                            available</div>
+                                        <button class="btn-link" style="color: var(--color-warning);">View Bed
+                                            Management <i class="ph ph-arrow-right"></i></button>
                                     </div>
                                     <div class="alert-card">
-                                        <div class="a-header"><i class="ph-fill ph-warning"></i> 5 unconfirmed appointments</div>
-                                        <button class="btn-link" style="color: var(--color-warning);">View Appointments <i class="ph ph-arrow-right"></i></button>
+                                        <div class="a-header"><i class="ph-fill ph-warning"></i> 5 unconfirmed
+                                            appointments</div>
+                                        <button class="btn-link" style="color: var(--color-warning);">View Appointments
+                                            <i class="ph ph-arrow-right"></i></button>
                                     </div>
                                     <div class="alert-card">
-                                        <div class="a-header"><i class="ph-fill ph-warning"></i> 3 accounts require verification</div>
-                                        <button class="btn-link" style="color: var(--color-warning);">View Users <i class="ph ph-arrow-right"></i></button>
+                                        <div class="a-header"><i class="ph-fill ph-warning"></i> 3 accounts require
+                                            verification</div>
+                                        <button class="btn-link" style="color: var(--color-warning);">View Users <i
+                                                class="ph ph-arrow-right"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -368,8 +385,12 @@
                                     <h3>Quick Actions</h3>
                                 </div>
                                 <div class="qa-grid">
-                                    <button class="qa-btn primary" onclick="document.querySelector('[data-target=\'users-view\']').click()"><i class="ph ph-plus-circle"></i> Add New User</button>
-                                    <button class="qa-btn primary" onclick="document.querySelector('[data-target=\'doctors-view\']').click()"><i class="ph ph-plus-circle"></i> Add Doctor</button>
+                                    <button class="qa-btn primary"
+                                        onclick="document.querySelector('[data-target=\'users-view\']').click()"><i
+                                            class="ph ph-plus-circle"></i> Add New User</button>
+                                    <button class="qa-btn primary"
+                                        onclick="document.querySelector('[data-target=\'doctors-view\']').click()"><i
+                                            class="ph ph-plus-circle"></i> Add Doctor</button>
                                     <button class="qa-btn"><i class="ph ph-buildings"></i> Add Department</button>
                                     <button class="qa-btn"><i class="ph ph-bed"></i> Manage Beds</button>
                                     <button class="qa-btn"><i class="ph ph-users"></i> Register Staff</button>
@@ -384,9 +405,10 @@
                 <div class="view" id="users-view">
                     <div class="panel-head">
                         <h3>User Management</h3>
-                        <button class="btn btn-primary" style="padding: 10px 20px;"><i class="ph ph-plus"></i> Add New User</button>
+                        <button class="btn btn-primary" style="padding: 10px 20px;"><i class="ph ph-plus"></i> Add New
+                            User</button>
                     </div>
-                    
+
                     <div class="tabs-nav">
                         <button class="tab-btn active">All Users</button>
                         <button class="tab-btn">Patients</button>
@@ -394,16 +416,27 @@
                         <button class="tab-btn">Receptionists</button>
                         <button class="tab-btn">Admins</button>
                     </div>
-                    
+
                     <div class="filters-bar">
                         <div class="search-bar" style="background: white;">
                             <i class="ph ph-magnifying-glass"></i>
                             <input type="text" placeholder="Search users...">
                         </div>
                         <div class="f-group">
-                            <select class="f-select"><option>Role</option><option>Doctor</option><option>Patient</option></select>
-                            <select class="f-select"><option>Status</option><option>Active</option><option>Inactive</option></select>
-                            <select class="f-select"><option>Department</option><option>Cardiology</option></select>
+                            <select class="f-select">
+                                <option>Role</option>
+                                <option>Doctor</option>
+                                <option>Patient</option>
+                            </select>
+                            <select class="f-select">
+                                <option>Status</option>
+                                <option>Active</option>
+                                <option>Inactive</option>
+                            </select>
+                            <select class="f-select">
+                                <option>Department</option>
+                                <option>Cardiology</option>
+                            </select>
                         </div>
                     </div>
 
@@ -462,9 +495,18 @@
                         <h3>Patient Management</h3>
                     </div>
                     <div class="stats-row" style="grid-template-columns: repeat(3, 1fr);">
-                        <div class="stat-card-compact"><div class="st-icon-title">Total Patients</div><div class="st-value">1,245</div></div>
-                        <div class="stat-card-compact"><div class="st-icon-title">New This Month</div><div class="st-value">128</div></div>
-                        <div class="stat-card-compact"><div class="st-icon-title">Active Patients</div><div class="st-value">1,180</div></div>
+                        <div class="stat-card-compact">
+                            <div class="st-icon-title">Total Patients</div>
+                            <div class="st-value">1,245</div>
+                        </div>
+                        <div class="stat-card-compact">
+                            <div class="st-icon-title">New This Month</div>
+                            <div class="st-value">128</div>
+                        </div>
+                        <div class="stat-card-compact">
+                            <div class="st-icon-title">Active Patients</div>
+                            <div class="st-value">1,180</div>
+                        </div>
                     </div>
                     <div class="panel">
                         <div class="filters-bar">
@@ -494,7 +536,8 @@
                                         <td>Aug 12, 2026</td>
                                         <td>Today</td>
                                         <td><span class="status-badge operational">Active</span></td>
-                                        <td><button class="btn-link">View Profile <i class="ph ph-arrow-right"></i></button></td>
+                                        <td><button class="btn-link">View Profile <i
+                                                    class="ph ph-arrow-right"></i></button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -506,9 +549,10 @@
                 <div class="view" id="departments-view">
                     <div class="panel-head">
                         <h3>Departments</h3>
-                        <button class="btn btn-primary" style="padding: 10px 20px;"><i class="ph ph-plus"></i> Add New Department</button>
+                        <button class="btn btn-primary" style="padding: 10px 20px;"><i class="ph ph-plus"></i> Add New
+                            Department</button>
                     </div>
-                    
+
                     <div class="cards-grid">
                         <div class="dept-card">
                             <div class="dc-header">
@@ -562,17 +606,31 @@
                     <div class="panel-head">
                         <h3>Rooms & Beds</h3>
                         <div class="action-dd">
-                            <button class="btn btn-secondary" style="padding: 10px 20px;"><i class="ph ph-plus"></i> Add Room</button>
-                            <button class="btn btn-primary" style="padding: 10px 20px;"><i class="ph ph-plus"></i> Add Bed</button>
+                            <button class="btn btn-secondary" style="padding: 10px 20px;"><i class="ph ph-plus"></i> Add
+                                Room</button>
+                            <button class="btn btn-primary" style="padding: 10px 20px;"><i class="ph ph-plus"></i> Add
+                                Bed</button>
                         </div>
                     </div>
                     <div class="stats-row" style="grid-template-columns: repeat(4, 1fr);">
-                        <div class="stat-card-compact"><div class="st-icon-title">Total Beds</div><div class="st-value">80</div></div>
-                        <div class="stat-card-compact"><div class="st-icon-title">Available</div><div class="st-value" style="color: var(--color-success);">32</div></div>
-                        <div class="stat-card-compact"><div class="st-icon-title">Occupied</div><div class="st-value" style="color: var(--color-warning);">42</div></div>
-                        <div class="stat-card-compact"><div class="st-icon-title">Maintenance</div><div class="st-value" style="color: var(--color-error);">6</div></div>
+                        <div class="stat-card-compact">
+                            <div class="st-icon-title">Total Beds</div>
+                            <div class="st-value">80</div>
+                        </div>
+                        <div class="stat-card-compact">
+                            <div class="st-icon-title">Available</div>
+                            <div class="st-value" style="color: var(--color-success);">32</div>
+                        </div>
+                        <div class="stat-card-compact">
+                            <div class="st-icon-title">Occupied</div>
+                            <div class="st-value" style="color: var(--color-warning);">42</div>
+                        </div>
+                        <div class="stat-card-compact">
+                            <div class="st-icon-title">Maintenance</div>
+                            <div class="st-value" style="color: var(--color-error);">6</div>
+                        </div>
                     </div>
-                    
+
                     <div class="rooms-container">
                         <div class="room-card">
                             <div class="room-header"><span>Room 101 (Cardiology)</span></div>
@@ -587,7 +645,8 @@
                             <div class="room-header"><span>Room 102 (General Care)</span></div>
                             <div class="beds-grid">
                                 <div class="bed-item available"><i class="ph ph-bed"></i> Bed 1<br>Available</div>
-                                <div class="bed-item maintenance"><i class="ph-fill ph-wrench"></i> Bed 2<br>Maint.</div>
+                                <div class="bed-item maintenance"><i class="ph-fill ph-wrench"></i> Bed 2<br>Maint.
+                                </div>
                                 <div class="bed-item occupied"><i class="ph-fill ph-bed"></i> Bed 3<br>Occupied</div>
                                 <div class="bed-item occupied"><i class="ph-fill ph-bed"></i> Bed 4<br>Occupied</div>
                             </div>
@@ -600,7 +659,7 @@
                     <div class="panel-head">
                         <h3>System Settings</h3>
                     </div>
-                    
+
                     <div class="settings-grid">
                         <div class="panel" style="padding: 16px;">
                             <div class="settings-nav">
@@ -665,7 +724,7 @@
                     <div class="panel-head">
                         <h3>Digital Documents & Paperless Workflow</h3>
                     </div>
-                    
+
                     <div class="workflow-visual">
                         <div class="wf-node">
                             <div class="wf-icon"><i class="ph ph-identification-badge"></i></div>
@@ -692,10 +751,11 @@
                             <div class="wf-label">E-Prescription</div>
                         </div>
                     </div>
-                    <p style="text-align: center; margin-top: 24px; color: var(--color-text-secondary); font-weight: 500;">
+                    <p
+                        style="text-align: center; margin-top: 24px; color: var(--color-text-secondary); font-weight: 500;">
                         One Connected Digital Hospital. No unnecessary paper files.
                     </p>
-                    
+
                     <div class="panel" style="margin-top: 32px;">
                         <div class="filters-bar">
                             <h3 style="margin: 0; font-size: 1.1rem;">Secure Document Storage</h3>
@@ -717,14 +777,17 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><i class="ph-fill ph-file-pdf" style="color: #e53e3e; margin-right: 8px;"></i> Lab_Report_001.pdf</td>
+                                        <td><i class="ph-fill ph-file-pdf"
+                                                style="color: #e53e3e; margin-right: 8px;"></i> Lab_Report_001.pdf</td>
                                         <td>Abel Tesfaye</td>
                                         <td>Lab Report</td>
                                         <td>Today</td>
                                         <td><button class="btn-link">View</button></td>
                                     </tr>
                                     <tr>
-                                        <td><i class="ph-fill ph-file-text" style="color: var(--color-primary); margin-right: 8px;"></i> Prescription_012.pdf</td>
+                                        <td><i class="ph-fill ph-file-text"
+                                                style="color: var(--color-primary); margin-right: 8px;"></i>
+                                            Prescription_012.pdf</td>
                                         <td>Sara Mohammed</td>
                                         <td>E-Prescription</td>
                                         <td>Yesterday</td>
@@ -737,16 +800,66 @@
                 </div>
 
                 <!-- Placeholder for other views (Doctors, Staff, Appointments, Lab, Billing, Reports, Notifications, Profile) -->
-                <div class="view" id="doctors-view"><div class="panel"><h3>Doctor Management</h3><p>Content goes here.</p></div></div>
-                <div class="view" id="staff-view"><div class="panel"><h3>Staff Management</h3><p>Content goes here.</p></div></div>
-                <div class="view" id="appointments-view"><div class="panel"><h3>Appointment Management</h3><p>Content goes here.</p></div></div>
-                <div class="view" id="records-view"><div class="panel"><h3>Medical Records</h3><p>Content goes here.</p></div></div>
-                <div class="view" id="prescriptions-view"><div class="panel"><h3>Prescriptions</h3><p>Content goes here.</p></div></div>
-                <div class="view" id="lab-view"><div class="panel"><h3>Laboratory Management</h3><p>Content goes here.</p></div></div>
-                <div class="view" id="billing-view"><div class="panel"><h3>Billing & Payments</h3><p>Content goes here.</p></div></div>
-                <div class="view" id="reports-view"><div class="panel"><h3>Reports & Analytics</h3><p>Content goes here.</p></div></div>
-                <div class="view" id="notifications-view"><div class="panel"><h3>Notifications</h3><p>Content goes here.</p></div></div>
-                <div class="view" id="profile-view"><div class="panel"><h3>Admin Profile</h3><p>Rania Mohammed - System Administrator</p></div></div>
+                <div class="view" id="doctors-view">
+                    <div class="panel">
+                        <h3>Doctor Management</h3>
+                        <p>Content goes here.</p>
+                    </div>
+                </div>
+                <div class="view" id="staff-view">
+                    <div class="panel">
+                        <h3>Staff Management</h3>
+                        <p>Content goes here.</p>
+                    </div>
+                </div>
+                <div class="view" id="appointments-view">
+                    <div class="panel">
+                        <h3>Appointment Management</h3>
+                        <p>Content goes here.</p>
+                    </div>
+                </div>
+                <div class="view" id="records-view">
+                    <div class="panel">
+                        <h3>Medical Records</h3>
+                        <p>Content goes here.</p>
+                    </div>
+                </div>
+                <div class="view" id="prescriptions-view">
+                    <div class="panel">
+                        <h3>Prescriptions</h3>
+                        <p>Content goes here.</p>
+                    </div>
+                </div>
+                <div class="view" id="lab-view">
+                    <div class="panel">
+                        <h3>Laboratory Management</h3>
+                        <p>Content goes here.</p>
+                    </div>
+                </div>
+                <div class="view" id="billing-view">
+                    <div class="panel">
+                        <h3>Billing & Payments</h3>
+                        <p>Content goes here.</p>
+                    </div>
+                </div>
+                <div class="view" id="reports-view">
+                    <div class="panel">
+                        <h3>Reports & Analytics</h3>
+                        <p>Content goes here.</p>
+                    </div>
+                </div>
+                <div class="view" id="notifications-view">
+                    <div class="panel">
+                        <h3>Notifications</h3>
+                        <p>Content goes here.</p>
+                    </div>
+                </div>
+                <div class="view" id="profile-view">
+                    <div class="panel">
+                        <h3>Admin Profile</h3>
+                        <p>Rania Mohammed - System Administrator</p>
+                    </div>
+                </div>
 
             </div>
         </main>
@@ -754,4 +867,5 @@
 
     <script src="admin_dashboard.js"></script>
 </body>
+
 </html>
